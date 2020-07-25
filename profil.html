@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My events</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <a href="/create">Create New Event</a>
+
+  <h1>My Events</h1>
+  <ul class="navEvents">
+    <li><a href="#upcoming">Upcoming Events</a></li>
+    <li><a href="#past">Past Events</a></li>
+  </ul>
+  <div>
+    <div role="tabpanel" id="upcoming">
+      <table
+        class="table tablesorter table-event tablesorter-blue tablesorter3855c9bda3f11 hasFilters tablesorter1f94981435b65"
+        role="grid">
+        <thead>
+          <tr>
+            <th>
+              <div>Event Name</div>
+            </th>
+            <th>
+              <div>Event Date</div>
+            </th>
+            <th>
+              <div>Location</div>
+            </th>
+            <th>
+              <div>Status</div>
+            </th>
+            <th>
+              <div>Link</div>
+            </th>
+            <th>
+              <div>Management</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr role="row">
+            <td><a href="/users/42164/events/38555">Conference For the world</a></td>
+            <td>August 31, 2020</td>
+            <td>Sofia</td>
+            <td>Live</td>
+            <td>https://...</td>
+            <td>
+              <ul>
+                <li>
+                  <a href="https://world.eventcreate.com?editing=true">Edit Event</a>
+                </li>
+                <li>
+                  <a href="/users/42164/events/38555/guestlist">Attendee List</a>
+                </li>
+                <li>
+                  <a href="/users/42164/events/38555/manage">Delete Event</a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div role="tabpanel" id="past">
+      <div class="editor-panel">
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <div>Event Name</div>
+              </th>
+              <th>
+                <div>Event Date</div>
+              </th>
+              <th>
+                <div>Location</div>
+              </th>
+              <th>
+                <div>Link</div>
+              </th>
+              <th>
+                <div>Management</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a class="bold" href="/users/42164/events/38595">Bday Lulu</a></td>
+              <td>July 22, 2020</td>
+              <td>Sofia</td>
+              <td>https://....</td>
+              <td>
+                <ul>
+                  <li>
+                    <a href="https://world.eventcreate.com?editing=true">Edit Event</a>
+                  </li>
+                  <li>
+                    <a href="/users/42164/events/38555/guestlist">Attendee List</a>
+                  </li>
+                  <li>
+                    <a href="/users/42164/events/38555/manage">Delete Event</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

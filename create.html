@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Create event</h1>
+
+    <form id="new_event" action="/users/42164/events" accept-charset="UTF-8" method="post">
+        <div class="form-group">
+            <label>Event Name</label>
+            <input placeholder="Vania's Birthday" type="text" name="name" id="name">
+        </div>
+        <div class="form-group">
+            <label> Event Type </label>
+            <select name=event_type id="event_type">
+                <option value="Party">Тype of event</option>
+                <option value="Party">Party</option>
+                <option value="Birthday">Birthday</option>
+                <option value="Wedding">Wedding</option>
+                <option value="Reunion">Reunion</option>
+                <option value="Festival">Festival</option>
+                <option value="Concert">Concert</option>
+                <option value="Seminar">Seminar</option>
+                <option value="Conference">Conference</option>
+                <option value="Sporting Event">Sporting Event</option>
+                <option value="Trip">Trip</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label><br>
+            <textarea name="description" cols="30" rows="10" type="text"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Count of guests</label>
+            <input value="10" type="number" name="count">
+        </div>
+        <div>
+            <h5>Location (optional): </h5>
+        </div>
+        <div class="form-group">
+            <label>Location Name</label>
+            <input placeholder="My House" type="text" name="location_name" id="location_name">
+        </div>
+        <div class="form-group">
+            <label>Location Address</label>
+            <input id="autocomplete" autocomplete="off" placeholder="15 Izgrev, Sofia" type="text" name="location">
+        </div>
+        <div>
+            <h5>Date/Time (optional):</h5>
+        </div>
+        <div class="form-group">
+            <label for="date_time">Date and time</label><br>
+            <input name="date_time" type="datetime-local"/>
+        </div>
+
+        <div>
+            <h5>Other Setup: </h5>
+        </div>
+
+        <div class="form-group">
+            <input type="hidden" name="is_public" id="is_public" value="true">
+            <label> Public or private event?</label>
+
+            <div class="form-group">
+                <div class="radio ">
+                    <label class="form-enhanced">
+                        <input value="true" type="radio" checked="checked" name="public_private">
+                        Public <small>Anyone can see it.</small>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="radio ">
+                    <label class="form-enhanced">
+                        <input value="false" type="radio" name="public_private">
+                        Private <small>Only people who have a link can see it.</small>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button>Create Now</button>
+        </div>
+    </form>
+</body>
+
+</html>
+
+
+<!-- 
+<div class="form-group">
+    <label>Link/URL</label>
+    <div class="input-group">
+        <input class="form-control" placeholder="myevent" pattern="^[a-zA-Z0-9-]{4,50}$" type="text"
+            name="event[slug]" id="event_slug">
+        <span class="input-group-addon">.eventcreate.com</span>
+    </div>
+    <div class="slug-error">
+        <p class="help-block red hidden"><i class="far fa-times-square" aria-hidden="true"></i> Sorry, that URL
+            is not available.</p>
+        <p class="help-block green hidden"><i class="far fa-check-square" aria-hidden="true"></i> Great! That
+            URL is available.</p>
+    </div>
+</div> -->

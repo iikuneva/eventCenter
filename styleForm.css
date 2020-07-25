@@ -1,0 +1,63 @@
+* {
+    font-family: 'Libre Franklin',
+    sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background: #A98EB8;
+  }
+  
+  h1, h2 {
+    text-align: center;
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+  
+  p {
+     text-align: center;
+     color: white;
+     font-weight: bold;
+  }
+  
+form {
+    display: grid;
+    width: 25%;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="number"],
+  textarea {
+    padding: 8px;
+    margin: 5px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid white;
+  }
+  
+  input[type="submit"],
+  button {
+    border: 2px solid #CEBED7;
+    background: #673D7E;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    font-weight: bold;
+    width: 30%;
+    margin: 0 auto;
+    padding: 8px;
+  }
+  
+  input[type="submit"]:hover {
+    border: 2px solid #673D7E;
+    background: #CEBED7;
+    color: #673D7E;
+    text-decoration: underline;
+  }
