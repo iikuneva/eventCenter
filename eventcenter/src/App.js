@@ -4,7 +4,6 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
 import './App.css';
 import Header from './components/header';
 import Footer from './components/footer';
@@ -40,4 +39,4 @@ const App = () => {
 }
 
 
-export default withRouter(App);
+export default App;
