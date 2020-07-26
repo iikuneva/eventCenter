@@ -1,0 +1,24 @@
+.header{
+    background-color: #E6E3DE;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0 2em 0 2em;
+    color: black;
+}
+
+.header nav ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+    
+.header ul li{
+    list-style: none;  
+    margin: 1em;
+}
+    
+.header a{
+    color: inherit;
+    text-decoration: none;
+}
