@@ -171,27 +171,27 @@ export async function updateEvent(id, updatedProps) {
     return data;
 }
 
-//delete event
-// export async function deleteEvent(id) {
+// delete event
+export async function deleteEvent(id) {
 
-//     const token = localStorage.getItem('userToken');
+    const token = localStorage.getItem('userToken');
 
-//     const result = fetch(host(endpoints.EVENT + "/" + id), {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'user-token': token
-//         }
-//     });
+    const result = fetch(host(endpoints.EVENT + "/" + id), {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'user-token': token
+        }
+    });
 
-//     const data = await response.json();
+    const data = await result.json();
 
-//     if (data.hasOwnProperty('errorData')) {
-//         const error = new Error();
-//         Object.assign(error, data);
-//         throw error;
-//     }
-//     return data;
-// }
+    if (data.hasOwnProperty('errorData')) {
+        const error = new Error();
+        Object.assign(error, data);
+        throw error;
+    }
+    return data;
+}
 
 
