@@ -2,7 +2,7 @@ import React from 'react';
 import {
   BrowserRouter,
   Switch,
-  Route
+  Route,
 } from 'react-router-dom';
 import './App.css';
 import Header from './components/header';
@@ -12,9 +12,9 @@ import HomePage from './pages/home';
 import AboutPage from './pages/about';
 import RegisterPage from './pages/register';
 import LoginPage from './pages/login';
-import ProfilePage from './pages/profile';
+// import ProfilePage from './pages/profile';
 import CreatePage from './pages/create';
-// import EventPage from './pages/event';
+import EventPage from './pages/event';
 import ErrorPage from './pages/error';
 
 const App = () => {
@@ -27,9 +27,9 @@ const App = () => {
           <Route path="/about" component={AboutPage} />
           <Route path="/users/register" component={RegisterPage} />
           <Route path="/users/login" component={LoginPage} />
-          <Route path="/users/:user_id" component={ProfilePage} />
+          {/* <Route path="/users/:id" component={ProfilePage} /> */}
+          <Route path="/data/event/:id" component={EventPage} />
           <Route path="/data/event" component={CreatePage} />
-            {/* <Route path="/data/event/:event_id" component={EventPage} /> */}
           <Route component={ErrorPage} />
         </Switch>
         <Footer />

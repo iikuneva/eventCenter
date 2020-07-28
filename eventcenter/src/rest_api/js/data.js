@@ -67,6 +67,13 @@ export async function logout() {
     return response;
 }
 
+//get event by Id
+export async function getEventById(id) {
+    const response = await fetch(host(endpoints.EVENT + '/' + id));
+    const data = await response.json();
+    return data;
+}
+
 //set category_id to event
 export async function setEventCategoryId(eventId, categoryId) {
     const token = localStorage.getItem('userToken');
