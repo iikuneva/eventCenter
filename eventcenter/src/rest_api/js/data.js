@@ -42,7 +42,7 @@ export async function login(email, password) {
 
     localStorage.setItem('userToken', data['user-token']);
     localStorage.setItem('email', data.email); //нужно ли е?
-    localStorage.setItem('userId', data.objectId);
+    localStorage.setItem('userid', data.objectId);
 
     return data;
 }
@@ -56,7 +56,7 @@ export async function logout() {
 
     localStorage.removeItem('userToken');
     localStorage.removeItem('email'); //ако е нужно?
-    localStorage.removeItem('userId');
+    localStorage.removeItem('userid');
 
     const response = await fetch(host(endpoints.LOGOUT), {
         method: 'GET',
@@ -133,7 +133,7 @@ export async function getEventsByOwnerId() {
     if (!token) {
         throw new Error(`User is not logged in`);
     }
-    const ownerId = localStorage.getItem('userId');
+    const ownerId = localStorage.getItem('userid');
 
     const result = fetch(host(endpoints.EVENT + `?where=ownerId%3D%27${ownerId}%27`), {
         headers: {
@@ -142,14 +142,15 @@ export async function getEventsByOwnerId() {
         }
     });
 
-    const data = await result.json();
+    // const data = await result.json();
 
-    if (data.hasOwnProperty('errorData')) {
-        const error = new Error();
-        Object.assign(error, data);
-        throw error;
-    }
-    return data;
+    // if (data.hasOwnProperty('errorData')) {
+    //     const error = new Error();
+    //     Object.assign(error, data);
+    //     throw error;
+    // }
+    return result;
+    // return data;
 }
 
 //edit event

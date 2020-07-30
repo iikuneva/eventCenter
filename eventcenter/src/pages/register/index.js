@@ -15,6 +15,7 @@ class RegisterPage extends Component {
             repeat: '',
             error: false
         };
+
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
     }
@@ -25,42 +26,22 @@ class RegisterPage extends Component {
 
     async onSubmitHandler(e) {
         e.preventDefault();
-        // if (this.state.password !== this.state.repeat) {
-        //     this.setState({
-        //         error: {
-        //             message: 'Check the form for errors',
-        //             errors: {
-        //                 repeat: "Passwords don't match"
-        //             }
-        //         }
-        //     });
-        //     return;
-        // }
-        const res = await register(this.state.name, this.state.email, this.state.password);
-        if (!res.success) {
-            this.setState({error: res});
-            return;
-        }
+
+        const {
+            name,
+            email,
+            password
+        } = this.state;
+
+        const res = await register(name, email, password);
         this.props.history.push('/users/login');
     }
 
     render() {
-        // let errors = null;
-        // if (this.state.error) {
-        //     errors = (
-        //         <div>
-        //             <h2 className="errorMessage">{this.state.error.message}</h2>
-        //             {Object.keys(this.state.error.errors).map(k => {
-        //                 return <p key={k}>{this.state.error.errors[k]}</p>;
-        //             })}
-        //         </div>
-        //     );
-        // }
 
         return (
             <div className="container">
                 <h1>Register</h1>
-                {/* {errors} */}
                 <form onSubmit={this.onSubmitHandler}>
                     <Input
                         name="name"
@@ -89,7 +70,7 @@ class RegisterPage extends Component {
                         onChange={this.onChangeHandler}
                         label="Repeat password"
                     />
-                    <input type="submit" className="btn btn-primary" value="Register" />
+                    <button>Register</button>
                 </form>
             </div>
         );

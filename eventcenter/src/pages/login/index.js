@@ -1,8 +1,8 @@
 
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Input from '../../components/input';
 import { login } from '../../rest_api/js/data.js';
-import { withRouter } from 'react-router-dom';
 
 
 class LoginPage extends Component {
@@ -24,13 +24,14 @@ class LoginPage extends Component {
 
     async onSubmitHandler(e) {
         e.preventDefault();
-        const res = await login(this.state.email, this.state.password);
-        if (!res.success) {
-            this.setState({error: res});
-            return;
-        }
-        localStorage.setItem('user-token', res.token);
-        this.props.history.push('/');      
+        const {
+            email,
+            password
+        } = this.state;
+
+        const res = await login(email, password);
+        // console.log(res)
+        this.props.history.push('/');        
     }
 
     render() {
@@ -51,7 +52,7 @@ class LoginPage extends Component {
                         onChange={this.onChangeHandler}
                         label="Password"
                     />
-                    <input type="submit" className="btn btn-primary" value="Login" />
+                   <button>Login</button>
                 </form>
             </div>
         );

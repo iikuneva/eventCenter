@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { getEventById } from '../../rest_api/js/data.js';
 import images from '../../utils/imgMap.js'
 // import GuestsSection from './guestsSection';
@@ -18,7 +19,9 @@ class EventPage extends Component {
     }
 
     async getData() {
-        const event = await getEventById(this.props.match.params.id);
+        const event = await getEventById(this.props.match.params.eventid);
+        console.log(this.props.match.params.eventid);
+        console.log(event.objectId);
         this.setState({ event });
         console.log(event);
     }
@@ -38,10 +41,16 @@ class EventPage extends Component {
                         <img alt={event.category} src={`${images[event.category]}`} />
                     </div>
                     <h1>{event.name}</h1>
-                    <h3>Location name: {event.address}</h3>
+                    <h3>Location name: {event.location_name}</h3>
                     <h3>Location address: {event.address}</h3>
                     <h3>Date/time: {event.date_time}</h3>
                     <p>{event.description}</p>
+                    <div>
+                        <button onClick={this.onSubmitHandler}>Atendee List</button>
+                        <button onClick={this.onSubmitHandler}>Edit</button>
+                        <button onClick={this.onSubmitHandler}>Delete</button>
+                    </div>
+                   
                     <div>
                         <button onClick={this.onSubmitHandler}>Confirm</button>
                         <button onClick={this.onSubmitHandler}>Reject</button>

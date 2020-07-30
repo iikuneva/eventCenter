@@ -11,7 +11,7 @@ const HomePage = () => {
                 </div>
                 <div id="select">
                     <select id="eventtype">
-                        <option value="Party">Тype of event</option>
+                        <option>Тype of event</option>
                         <option value="Party">Party</option>
                         <option value="Birthday">Birthday</option>
                         <option value="Wedding">Wedding</option>
