@@ -1,26 +1,43 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Input from '../../components/input';
-import { createEvent } from '../../rest_api/js/data.js';
+import { getEventById, updateEvent } from '../../rest_api/js/data.js';
 
-class CreatePage extends Component {
+class EditPage extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            name: '',
-            description: '',
-            location_name: '',
-            address: '',
-            category: '',
-            date_time: '',
-            is_public: true,
-            error: false
+                name: '',
+                location_name: '',
+                description: '',
+                address: '',
+                category: '',
+                date_time: '',
+                is_public: true
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
         this.onRadioHandler = this.onRadioHandler.bind(this);
+    }
+
+    componentDidMount() {
+        this.getData();
+    }
+
+    async getData() {
+        const defaultEvent = await getEventById(this.props.match.params.eventid);
+        
+        this.setState({ 
+            name: defaultEvent.name,
+            location_name: defaultEvent.location_name,
+            description: defaultEvent.description,
+            address: defaultEvent.address,
+            category: defaultEvent.category,
+            date_time: defaultEvent.date_time,
+            is_public: defaultEvent.is_public
+        });
     }
 
     onChangeHandler(e) {
@@ -35,7 +52,7 @@ class CreatePage extends Component {
     async onSubmitHandler(e) {
         e.preventDefault();
 
-        const event = {
+        const updatedEvent = {
             name: this.state.name,
             location_name: this.state.location_name,
             description: this.state.description,
@@ -44,17 +61,18 @@ class CreatePage extends Component {
             date_time: this.state.date_time,
             is_public: this.state.is_public
         };
-
-        const res = await createEvent(event);
-        console.log(res)
-        let eventid = res.objectId;
+        let eventid = this.props.match.params.eventid;
+        await updateEvent(eventid, updatedEvent);
+        this.setState({ updatedEvent });
+      
         this.props.history.push(`/data/event/${eventid}`);
     }
 
     render() {
+
         return (
             <div>
-                <h1>Create event</h1>
+                <h1>Edit event</h1>
                 <form onSubmit={this.onSubmitHandler}>
                     <Input
                         name='name'
@@ -126,11 +144,11 @@ class CreatePage extends Component {
                             />
                         </label>
                     </div>
-                    <button>Create</button>
+                    <button>Update event</button>
                 </form>
             </div>
         );
     }
 }
 
-export default withRouter(CreatePage);
+export default withRouter(EditPage);

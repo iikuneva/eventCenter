@@ -29,8 +29,8 @@ class LoginPage extends Component {
             password
         } = this.state;
 
-        const res = await login(email, password);
-        // console.log(res)
+        await login(email, password);
+        
         this.props.history.push('/');        
     }
 

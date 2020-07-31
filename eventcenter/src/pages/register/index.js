@@ -33,7 +33,7 @@ class RegisterPage extends Component {
             password
         } = this.state;
 
-        const res = await register(name, email, password);
+        await register(name, email, password);
         this.props.history.push('/users/login');
     }
 

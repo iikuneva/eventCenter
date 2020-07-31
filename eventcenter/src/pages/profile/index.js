@@ -17,14 +17,12 @@ class ProfilePage extends Component {
     }
     componentDidMount() {
         this.getData();
-        console.log(this.props)
-        // console.log(this.props.match)
+        // console.log(this.props)
     }
   
     async getData() {
         const data = await getEventsByOwnerId();
         const events = await data.json();
-        const userid = localStorage.getItem('userid');
         this.setState({ events });
     }
 

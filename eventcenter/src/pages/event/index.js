@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-import { getEventById } from '../../rest_api/js/data.js';
+import { getEventById, deleteEvent } from '../../rest_api/js/data.js';
 import images from '../../utils/imgMap.js'
 // import GuestsSection from './guestsSection';
 
@@ -13,6 +14,8 @@ class EventPage extends Component {
         };
 
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
+    this.deleteHandler = this.deleteHandler.bind(this);
+    this.onEditHandler = this.onEditHandler.bind(this);
 }
     componentDidMount() {
         this.getData();
@@ -20,15 +23,30 @@ class EventPage extends Component {
 
     async getData() {
         const event = await getEventById(this.props.match.params.eventid);
-        console.log(this.props.match.params.eventid);
-        console.log(event.objectId);
+        // console.log(this.props.match.params.eventid);
+        // console.log(event.objectId);
         this.setState({ event });
-        console.log(event);
+        // console.log(event);
     }
 
     async onSubmitHandler(e) {
         e.preventDefault();
     
+    }
+
+    atendeeHandler(e){
+        this.props.history.push('/users/profile'); 
+    }
+
+    async deleteHandler(e){
+        await deleteEvent(this.props.match.params.eventid);
+        this.setState({ event: false });
+        this.props.history.push('/users/profile'); 
+    }
+
+    onEditHandler(){
+        let eventid = this.props.match.params.eventid;
+        this.props.history.push(`/data/event/edit/${eventid}`)
     }
 
     render() {
@@ -46,9 +64,11 @@ class EventPage extends Component {
                     <h3>Date/time: {event.date_time}</h3>
                     <p>{event.description}</p>
                     <div>
-                        <button onClick={this.onSubmitHandler}>Atendee List</button>
-                        <button onClick={this.onSubmitHandler}>Edit</button>
-                        <button onClick={this.onSubmitHandler}>Delete</button>
+                        <button onClick={this.atendeeHandler}>Atendee List</button>
+                        {/* <button onClick={this.editHandler}>Edit</button> */}
+                        {/* <Link to={'/data/event/edit/' + this.props.match.params.eventid}>Edit</Link> */}
+                        <button onClick={this.onEditHandler}>Edit event</button>
+                        <button onClick={this.deleteHandler}>Delete event</button>
                     </div>
                    
                     <div>
@@ -69,4 +89,4 @@ class EventPage extends Component {
     }
 }
 
-export default EventPage;
+export default withRouter(EventPage);

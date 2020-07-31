@@ -154,13 +154,13 @@ export async function getEventsByOwnerId() {
 }
 
 //edit event
-export async function updateEvent(id, updatedProps) {
+export async function updateEvent(eventid, updatedProps) {
     const token = localStorage.getItem('userToken');
     if (!token) {
         throw new Error(`User is not logged in`);
     }
 
-    const result = fetch(host(endpoints.EVENT + "/" + id), {
+    const result = fetch(host(endpoints.EVENT + "/" + eventid), {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -169,14 +169,15 @@ export async function updateEvent(id, updatedProps) {
         body: JSON.stringify(updatedProps)
     });
 
-    const data = await result.json();
+   return result;
+    // const data = await result.json();
 
-    if (data.hasOwnProperty('errorData')) {
-        const error = new Error();
-        Object.assign(error, data);
-        throw error;
-    }
-    return data;
+    // if (data.hasOwnProperty('errorData')) {
+    //     const error = new Error();
+    //     Object.assign(error, data);
+    //     throw error;
+    // }
+    // return data;
 }
 
 // delete event
@@ -192,14 +193,16 @@ export async function deleteEvent(id) {
         }
     });
 
-    const data = await result.json();
+    return result;
 
-    if (data.hasOwnProperty('errorData')) {
-        const error = new Error();
-        Object.assign(error, data);
-        throw error;
-    }
-    return data;
+    // const data = await result.json();
+
+    // if (data.hasOwnProperty('errorData')) {
+    //     const error = new Error();
+    //     Object.assign(error, data);
+    //     throw error;
+    // }
+    // return data;
 }
 
 
