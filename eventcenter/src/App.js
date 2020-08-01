@@ -15,6 +15,7 @@ import ProfilePage from './pages/profile';
 import CreatePage from './pages/create';
 import EditPage from './pages/edit';
 import EventPage from './pages/event';
+import AtendeesPage from './pages/atendees';
 import ErrorPage from './pages/error';
 
 class App extends Component {
@@ -31,6 +32,7 @@ class App extends Component {
           <Route path="/data/event/:eventid" exact component={EventPage} />
           <Route path="/data/event" exact component={CreatePage} />
           <Route path="/data/event/edit/:eventid" exact component={EditPage} />
+          <Route path="/data/event/atendees/:eventid" exact component={AtendeesPage} />
           <Route component={ErrorPage} />
         </Switch>
         <Footer />

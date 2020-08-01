@@ -46,7 +46,7 @@ class CreatePage extends Component {
         };
 
         const res = await createEvent(event);
-        console.log(res)
+        // console.log(res)
         let eventid = res.objectId;
         this.props.history.push(`/data/event/${eventid}`);
     }

@@ -28,7 +28,7 @@ class EditPage extends Component {
 
     async getData() {
         const defaultEvent = await getEventById(this.props.match.params.eventid);
-        
+
         this.setState({ 
             name: defaultEvent.name,
             location_name: defaultEvent.location_name,
@@ -64,7 +64,7 @@ class EditPage extends Component {
         let eventid = this.props.match.params.eventid;
         await updateEvent(eventid, updatedEvent);
         this.setState({ updatedEvent });
-      
+
         this.props.history.push(`/data/event/${eventid}`);
     }
 

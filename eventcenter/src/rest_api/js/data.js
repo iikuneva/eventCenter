@@ -6,7 +6,8 @@ const endpoints = {
     REGISTER: 'users/register',
     LOGIN: 'users/login',
     LOGOUT: 'users/logout',
-    EVENT: 'data/event'
+    EVENT: 'data/event',
+    GUESTS: 'data/guests'
 };
 
 //register
@@ -184,6 +185,9 @@ export async function updateEvent(eventid, updatedProps) {
 export async function deleteEvent(id) {
 
     const token = localStorage.getItem('userToken');
+    if (!token) {
+        throw new Error(`User is not logged in`);
+    }
 
     const result = fetch(host(endpoints.EVENT + "/" + id), {
         method: 'DELETE',
@@ -205,4 +209,103 @@ export async function deleteEvent(id) {
     // return data;
 }
 
+//create Guest
+export async function createGuest (guest) {
+    const token = localStorage.getItem('userToken');
+    if (!token) {
+        throw new Error(`User is not logged in`);
+    }
 
+    const response = await fetch(host(endpoints.GUESTS), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'user-token': token
+        },
+        body: JSON.stringify(guest)
+    });
+    const data = await response.json();
+
+    if (data.hasOwnProperty('errorData')) {
+        const error = new Error();
+        Object.assign(error, data);
+        throw error;
+    }
+
+    return data;
+}
+
+
+//set guestId to event
+export async function setEventGuestId(guestid, eventid) {
+    const token = localStorage.getItem('userToken');
+    if (!token) {
+        throw new Error(`User is not logged in`);
+    }
+
+    const response = await fetch(host(endpoints.EVENT + "/" + eventid + "/guests_id"), {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'user-token': token
+        },
+        body: JSON.stringify([`${guestid}`])
+    });
+
+    const data = await response.json();
+
+    if (data.hasOwnProperty('errorData')) {
+        const error = new Error();
+        Object.assign(error, data);
+        throw error;
+    }
+
+    return data;
+}
+
+//get all guests in an event
+export async function getAllGuestsByEventId(eventid) {
+    const token = localStorage.getItem('userToken');
+    if (!token) {
+        throw new Error(`User is not logged in`);
+    }
+
+    const result = fetch(host(endpoints.EVENT + `/${eventid}?loadRelations=guests_id`), {
+        headers: {
+            'Content-Type': 'application/json',
+            'user-token': token
+        }
+    });
+    // const data = await result.json();
+
+    // if (data.hasOwnProperty('errorData')) {
+    //     const error = new Error();
+    //     Object.assign(error, data);
+    //     throw error;
+    // }
+    // return data;
+    return result;
+}
+
+
+//delete guest
+export async function deleteGuest(id) {
+
+    const token = localStorage.getItem('userToken');
+    if (!token) {
+        throw new Error(`User is not logged in`);
+    }
+
+    const result = fetch(host(endpoints.GUESTS + "/" + id), {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'user-token': token
+        }
+    });
+
+    return result;
+
+    // should I update event?;
+
+}

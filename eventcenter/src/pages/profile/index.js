@@ -17,7 +17,6 @@ class ProfilePage extends Component {
     }
     componentDidMount() {
         this.getData();
-        // console.log(this.props)
     }
   
     async getData() {

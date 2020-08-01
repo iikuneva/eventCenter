@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
 import { getEventById, deleteEvent } from '../../rest_api/js/data.js';
 import images from '../../utils/imgMap.js'
 // import GuestsSection from './guestsSection';
@@ -16,6 +15,7 @@ class EventPage extends Component {
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
     this.deleteHandler = this.deleteHandler.bind(this);
     this.onEditHandler = this.onEditHandler.bind(this);
+    this.atendeeHandler = this.atendeeHandler.bind(this);
 }
     componentDidMount() {
         this.getData();
@@ -23,10 +23,7 @@ class EventPage extends Component {
 
     async getData() {
         const event = await getEventById(this.props.match.params.eventid);
-        // console.log(this.props.match.params.eventid);
-        // console.log(event.objectId);
         this.setState({ event });
-        // console.log(event);
     }
 
     async onSubmitHandler(e) {
@@ -35,7 +32,8 @@ class EventPage extends Component {
     }
 
     atendeeHandler(e){
-        this.props.history.push('/users/profile'); 
+        let eventid = this.props.match.params.eventid;
+        this.props.history.push(`/data/event/atendees/${eventid}`); 
     }
 
     async deleteHandler(e){
@@ -65,8 +63,6 @@ class EventPage extends Component {
                     <p>{event.description}</p>
                     <div>
                         <button onClick={this.atendeeHandler}>Atendee List</button>
-                        {/* <button onClick={this.editHandler}>Edit</button> */}
-                        {/* <Link to={'/data/event/edit/' + this.props.match.params.eventid}>Edit</Link> */}
                         <button onClick={this.onEditHandler}>Edit event</button>
                         <button onClick={this.deleteHandler}>Delete event</button>
                     </div>
