@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import GuestForm from '../../components/guestForm';
 import GuestList from '../../components/guestList';
 import { getAllGuestsByEventId } from '../../rest_api/js/data'
-import { createGuest, setEventGuestId } from '../../rest_api/js/data.js';
+import { createGuest, setEventGuestId, deleteGuest } from '../../rest_api/js/data.js';
 
 
 class Atendees extends Component {
@@ -14,7 +14,8 @@ class Atendees extends Component {
             event: false,
             guests: false
         };
-        // this.deleteGuestHandler = this.deleteGuestHandler.bind(this);
+
+        this.deleteGuestHandler = this.deleteGuestHandler.bind(this);
         this.addGuestToList = this.addGuestToList.bind(this);
     }
 
@@ -42,9 +43,12 @@ class Atendees extends Component {
         this.getData();
     }
 
-    async deleteGuestHandler() {
-
+    async deleteGuestHandler(id) {
+        await deleteGuest(id);
+        this.getData();
+        // window.location.reload();
     }
+
 
     render() {
         return (
@@ -53,7 +57,7 @@ class Atendees extends Component {
                 <h2>{this.state.event.name}</h2>
                 <h3>{this.state.event.date_time}</h3>
                 <GuestForm addGuestToList={this.addGuestToList}/>
-                <GuestList guests={this.state.guests} />
+                <GuestList guests={this.state.guests} deleteGuestHandler={this.deleteGuestHandler} />
             </div>
         )
     }

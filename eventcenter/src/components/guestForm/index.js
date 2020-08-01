@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Input from '../../components/input';
-import { createGuest, setEventGuestId } from '../../rest_api/js/data.js';
 
 class GuestForm extends Component {
     constructor(props) {

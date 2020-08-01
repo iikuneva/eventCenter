@@ -1,9 +1,11 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class GuestList extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
+
     render() {
         let guests = this.props.guests || [];
         console.log(guests)
@@ -24,7 +26,7 @@ class GuestList extends Component {
                                         <td><h4>{guest.name}</h4></td>
                                         <td><h4>{guest.email}</h4></td>
                                         <td><h4>{guest.status = 'pending'}</h4></td>
-                                        {/* <td><button onClick={() => this.deleteGuestHandler(guest.objectId)}>Delete</button></td> */}
+                                        <td><button onClick={() => this.props.deleteGuestHandler(guest.objectId)}>Delete</button></td>
                                     </tr>
                                 </Fragment>
                             );
@@ -37,4 +39,4 @@ class GuestList extends Component {
     }
 }
 
-export default GuestList;
+export default withRouter(GuestList);
