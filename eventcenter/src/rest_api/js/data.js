@@ -318,7 +318,7 @@ export async function sendingEmails(guestsEmails, ownerName, eventName, eventLin
     if (!token) {
         throw new Error(`User is not logged in`);
     }
-   
+
     const result = await fetch(host(endpoints.EMAILS), {
         method: 'POST',
         headers: {
@@ -328,26 +328,87 @@ export async function sendingEmails(guestsEmails, ownerName, eventName, eventLin
         body: JSON.stringify({
             "subject": "Event center Invitation",
             "bodyparts": {
-                "textmessage": `Hello!\nYou have new invitation for ${eventName} from ${ownerName}.\nFor more details, please follow the link: ${eventLink}.\n\nBest regards,\nEvent center`
+                "textmessage": `Hello!\nYou have new invitation for ${eventName} from ${ownerName}.\nFor more details, please follow the link: ${eventLink}\n\nBest regards,\nEvent center`
             },
             "to": guestsEmails
         })
     });
-    
+
     return result;
 }
 
 //get owner name by ownerId
-export async function getOwnerNameByOwnerId(){
+export async function getOwnerNameByOwnerId() {
     const token = localStorage.getItem('userToken');
     if (!token) {
         throw new Error(`User is not logged in`);
     }
 
-    const ownerId = localStorage.getItem('userid'); 
+    const ownerId = localStorage.getItem('userid');
     const response = await fetch(host(endpoints.USER + "/" + ownerId));
-    
+
     const data = await response.json();
     const ownerName = data.name;
     return ownerName;
 }
+
+//guest's confirmation
+export async function guestConfirmation(guestid) {
+
+    const result = await fetch(host(endpoints.GUESTS + `/${guestid}`), {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(
+                { 
+                "is_pending": false,
+                 "is_attending": true 
+                })
+    });
+    const data = await result.json();
+    return data;
+}
+
+//guest's confirmation
+export async function guestRejection(guestid) {
+
+    const result = await fetch(host(endpoints.GUESTS + `/${guestid}`), {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(
+                { 
+                "is_pending": false,
+                 "is_attending": false 
+                })
+    });
+    const data = await result.json();
+    return data;
+}
+
+//get guestid
+// export async function getGuestId(eventid, guestid) {
+//     let allGuest = getAllGuestsByEventId(eventid);
+
+//     // `?where=email%3D%27${guestEmail}%27`
+//     // `?where=email%3D%27nia_kuneva@abv.bg%27`
+
+//     const result = fetch(host(endpoints.EVENT + `/${eventid}`), {
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     });
+//     // const data = await result.json();
+
+//     // if (data.hasOwnProperty('errorData')) {
+//     //     const error = new Error();
+//     //     Object.assign(error, data);
+//     //     throw error;
+//     // }
+//     // return data;
+//     return result;
+// }
+
+

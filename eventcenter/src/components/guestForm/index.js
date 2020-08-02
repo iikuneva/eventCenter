@@ -27,7 +27,7 @@ class GuestForm extends Component {
         let guest = {
             name: this.state.name,
             email: this.state.email,
-            state: 'panding',
+            status: 'panding',
             is_pending: true,
             is_attending: false
         }
