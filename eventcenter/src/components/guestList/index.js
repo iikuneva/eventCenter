@@ -8,7 +8,7 @@ class GuestList extends Component {
 
     render() {
         let guests = this.props.guests || [];
-        console.log(guests)
+        // console.log(guests)
         return (
             <div>
                 <table>
@@ -33,7 +33,6 @@ class GuestList extends Component {
                         })}
                     </tbody>
                 </table>
-                <button>Send invitations</button>
             </div>
         )
     }

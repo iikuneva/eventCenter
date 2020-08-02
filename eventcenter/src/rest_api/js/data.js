@@ -7,7 +7,9 @@ const endpoints = {
     LOGIN: 'users/login',
     LOGOUT: 'users/logout',
     EVENT: 'data/event',
-    GUESTS: 'data/guests'
+    GUESTS: 'data/guests',
+    EMAILS: 'messaging/email',
+    USER: 'users'
 };
 
 //register
@@ -76,31 +78,31 @@ export async function getEventById(id) {
 }
 
 //set category_id to event
-export async function setEventCategoryId(eventId, categoryId) {
-    const token = localStorage.getItem('userToken');
-    if (!token) {
-        throw new Error(`User is not logged in`);
-    }
+// export async function setEventCategoryId(eventId, categoryId) {
+//     const token = localStorage.getItem('userToken');
+//     if (!token) {
+//         throw new Error(`User is not logged in`);
+//     }
 
-    const response = await fetch(host(endpoints.EVENT + "/" + eventId + "/category_id"), {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'user-token': token
-        },
-        body: JSON.stringify([`${categoryId}`]) //body: [`${categoryId}`]
-    });
+//     const response = await fetch(host(endpoints.EVENT + "/" + eventId + "/category_id"), {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'user-token': token
+//         },
+//         body: JSON.stringify([`${categoryId}`]) //body: [`${categoryId}`]
+//     });
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    if (data.hasOwnProperty('errorData')) {
-        const error = new Error();
-        Object.assign(error, data);
-        throw error;
-    }
+//     if (data.hasOwnProperty('errorData')) {
+//         const error = new Error();
+//         Object.assign(error, data);
+//         throw error;
+//     }
 
-    return data;
-}
+//     return data;
+// }
 
 //create new event
 export async function createEvent(event) {
@@ -170,7 +172,7 @@ export async function updateEvent(eventid, updatedProps) {
         body: JSON.stringify(updatedProps)
     });
 
-   return result;
+    return result;
     // const data = await result.json();
 
     // if (data.hasOwnProperty('errorData')) {
@@ -210,7 +212,7 @@ export async function deleteEvent(id) {
 }
 
 //create Guest
-export async function createGuest (guest) {
+export async function createGuest(guest) {
     const token = localStorage.getItem('userToken');
     if (!token) {
         throw new Error(`User is not logged in`);
@@ -308,4 +310,44 @@ export async function deleteGuest(id) {
 
     // should I update event?;
 
+}
+
+//sending emails to the guests
+export async function sendingEmails(guestsEmails, ownerName, eventName, eventLink) {
+    const token = localStorage.getItem('userToken');
+    if (!token) {
+        throw new Error(`User is not logged in`);
+    }
+   
+    const result = await fetch(host(endpoints.EMAILS), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'user-token': token
+        },
+        body: JSON.stringify({
+            "subject": "Event center Invitation",
+            "bodyparts": {
+                "textmessage": `Hello!\nYou have new invitation for ${eventName} from ${ownerName}.\nFor more details, please follow the link: ${eventLink}.\n\nBest regards,\nEvent center`
+            },
+            "to": guestsEmails
+        })
+    });
+    
+    return result;
+}
+
+//get owner name by ownerId
+export async function getOwnerNameByOwnerId(){
+    const token = localStorage.getItem('userToken');
+    if (!token) {
+        throw new Error(`User is not logged in`);
+    }
+
+    const ownerId = localStorage.getItem('userid'); 
+    const response = await fetch(host(endpoints.USER + "/" + ownerId));
+    
+    const data = await response.json();
+    const ownerName = data.name;
+    return ownerName;
 }
