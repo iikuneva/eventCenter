@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import {
   withRouter,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 import './App.css';
 import Header from './components/header';
@@ -17,29 +18,43 @@ import EditPage from './pages/edit';
 import EventPage from './pages/event';
 import AtendeesPage from './pages/atendees';
 import ErrorPage from './pages/error';
+import UserContext from './Context';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <Switch>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/about" component={AboutPage} />
-          <Route path="/users/register" component={RegisterPage} />
-          <Route path="/users/login" component={LoginPage} />
-          <Route path="/users/profile" component={ProfilePage} />
-          <Route path="/data/event/:eventid" exact component={EventPage} />
-          <Route path="/data/event" exact component={CreatePage} />
-          <Route path="/data/event/edit/:eventid" exact component={EditPage} />
-          <Route path="/data/event/atendees/:eventid" exact component={AtendeesPage} />
-          <Route component={ErrorPage} />
-        </Switch>
-        <Footer />
-      </div>
-    );
-  }
+const App = () => {
+  const context = useContext(UserContext)
+  const loggedIn = context.user && context.user.loggedIn;
+
+  return (
+    <div className="App">
+      <Header />
+      <Switch>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/about" component={AboutPage} />
+        <Route exact path="/users/register">
+          {loggedIn ? (<Redirect to="/" />) : (<RegisterPage />)}
+        </Route>
+        <Route exact path="/users/login">
+          {loggedIn ? (<Redirect to="/" />) : (<LoginPage />)}
+        </Route>
+        <Route exact path="/users/profile">
+          {loggedIn ? (<ProfilePage />) : (<Redirect to="/users/login" />)}
+        </Route>
+        <Route exact path="/data/event/:eventid" component={EventPage} />
+        <Route exact path="/data/event">
+          {loggedIn ? (<CreatePage />) : (<Redirect to="/users/login" />)}
+        </Route>
+        <Route exact path="/data/event/edit/:eventid">
+          {loggedIn ? (<EditPage />) : (<Redirect to="/users/login" />)}
+        </Route>
+        <Route exact path="/data/event/atendees/:eventid">
+          {loggedIn ? (<AtendeesPage />) : (<Redirect to="/users/login" />)}
+        </Route>
+        <Route exact path="/users/logout" component={HomePage} />
+        <Route component={ErrorPage} />
+      </Switch>
+      <Footer />
+    </div>
+  );
 }
-
 
 export default withRouter(App);

@@ -1,55 +1,46 @@
-
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Input from '../../components/input';
 import { login } from '../../rest_api/js/data.js';
+import UserContext from '../../Context';
+
+const LoginPage = () => {
+   
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const context = useContext(UserContext);
+    const history = useHistory();
 
 
-class LoginPage extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            email: '',
-            password: ''
-        };
-
-        this.onChangeHandler = this.onChangeHandler.bind(this);
-        this.onSubmitHandler = this.onSubmitHandler.bind(this);
-    }
-
-    onChangeHandler(e) {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-
-    async onSubmitHandler(e) {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
-        const {
-            email,
-            password
-        } = this.state;
 
-        await login(email, password);
+       const result = await login(email, password);
+        // if (!result.success) {
+        //    console.log('Error', result) //?
+        //     return;
+        // }
+
+        context.logIn(result);
         
-        this.props.history.push('/');        
+        history.push('/');        
     }
 
-    render() {
         return (
             <div className="container">
                 <h1>Login</h1>
-                <form onSubmit={this.onSubmitHandler}>
+                <form onSubmit={onSubmitHandler}>
                     <Input
                         name="email"
-                        value={this.state.email}
-                        onChange={this.onChangeHandler}
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                         label="E-mail"
                     />
                     <Input
                         name="password"
                         type="password"
-                        value={this.state.password}
-                        onChange={this.onChangeHandler}
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
                         label="Password"
                     />
                    <button>Login</button>
@@ -57,6 +48,6 @@ class LoginPage extends Component {
             </div>
         );
     }
-}
 
-export default withRouter(LoginPage);
+
+export default LoginPage;

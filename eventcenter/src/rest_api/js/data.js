@@ -51,7 +51,7 @@ export async function login(email, password) {
 }
 
 //logout
-export async function logout() {
+export async function logoutApi() {
     const token = localStorage.getItem('userToken');
     if (!token) {
         throw new Error(`User is not logged in`);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Input from '../../components/input';
 import { register } from '../../rest_api/js/data.js';
 import { withRouter } from 'react-router-dom';
+import UserContext from '../../Context';
 
 
 class RegisterPage extends Component {
@@ -20,6 +21,8 @@ class RegisterPage extends Component {
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
     }
 
+    static contextType = UserContext;
+
     onChangeHandler(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
@@ -33,7 +36,14 @@ class RegisterPage extends Component {
             password
         } = this.state;
 
-        await register(name, email, password);
+        const result = await register(name, email, password);
+        if (!result.success) {
+            this.setState({error: result}); //?
+            return;
+        }
+
+        this.context.logIn(result);
+
         this.props.history.push('/users/login');
     }
 
