@@ -9,7 +9,8 @@ const endpoints = {
     EVENT: 'data/event',
     GUESTS: 'data/guests',
     EMAILS: 'messaging/email',
-    USER: 'users'
+    USER: 'users',
+    GETUSERS: '/data/Users'
 };
 
 //register
@@ -72,37 +73,11 @@ export async function logoutApi() {
 
 //get event by Id
 export async function getEventById(id) {
-    const response = await fetch(host(endpoints.EVENT + '/' + id));
+    const response = await fetch(host(endpoints.EVENT + '/' + id + `?relationsDepth=1`));
     const data = await response.json();
     return data;
 }
 
-//set category_id to event
-// export async function setEventCategoryId(eventId, categoryId) {
-//     const token = localStorage.getItem('userToken');
-//     if (!token) {
-//         throw new Error(`User is not logged in`);
-//     }
-
-//     const response = await fetch(host(endpoints.EVENT + "/" + eventId + "/category_id"), {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'user-token': token
-//         },
-//         body: JSON.stringify([`${categoryId}`]) //body: [`${categoryId}`]
-//     });
-
-//     const data = await response.json();
-
-//     if (data.hasOwnProperty('errorData')) {
-//         const error = new Error();
-//         Object.assign(error, data);
-//         throw error;
-//     }
-
-//     return data;
-// }
 
 //create new event
 export async function createEvent(event) {
@@ -430,3 +405,79 @@ export async function getAllPublicEvents(){
     // return data;
 }
 
+export async function joinEvent(eventid){
+    const token = localStorage.getItem('userToken');
+    if (!token) {
+        throw new Error(`User is not logged in`);
+    }
+
+    const guestid = localStorage.getItem('userid');
+
+    const response = await fetch(host(endpoints.EVENT + "/" + eventid + "/users_id"), {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'user-token': token
+        },
+        body: JSON.stringify([`${guestid}`])
+    });
+
+    const data = await response.json();
+
+    if (data.hasOwnProperty('errorData')) {
+        const error = new Error();
+        Object.assign(error, data);
+        throw error;
+    }
+
+    return data;
+}
+
+export async function getAllJoinedUsersByEventId(eventid){
+    const token = localStorage.getItem('userToken');
+    if (!token) {
+        throw new Error(`User is not logged in`);
+    }
+
+    const result = await fetch(host(endpoints.EVENT + `/${eventid}?loadRelations=users_id`), {
+        headers: {
+            'Content-Type': 'application/json',
+            'user-token': token
+        }
+    });
+    // const data = await result.json();
+
+    // if (data.hasOwnProperty('errorData')) {
+    //     const error = new Error();
+    //     Object.assign(error, data);
+    //     throw error;
+    // }
+    // return data;
+    return result;
+}
+
+export async function getCoutJoinedUsersByEventId(eventid){
+    const token = localStorage.getItem('userToken');
+
+    if (!token) {
+        throw new Error(`User is not logged in`);
+    }
+
+    const result = await fetch(host(endpoints.GETUSERS + `/count?where=Event%5Busers_id%5D.objectId%20%3D%20%27${eventid}%27`), {
+        headers: {
+            'Content-Type': 'application/json',
+            'user-token': token
+        }
+    });
+    // const data = await result.json();
+
+    // if (data.hasOwnProperty('errorData')) {
+    //     const error = new Error();
+    //     Object.assign(error, data);
+    //     throw error;
+    // }
+    // return data;
+    return result;
+}
+
+// `/data/Users/count?where=Event%5Busers_id%5D.objectId%20%3D%20%27${eventid}%27`

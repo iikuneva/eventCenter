@@ -14,6 +14,8 @@ class CreatePage extends Component {
             address: '',
             category: '',
             date_time: '',
+            imageUrl: '',
+            max_guests: 0,
             is_public: true,
             error: false
         };
@@ -42,7 +44,9 @@ class CreatePage extends Component {
             address: this.state.address,
             category: this.state.category,
             date_time: this.state.date_time,
-            is_public: this.state.is_public
+            imageUrl: this.state.imageUrl,
+            max_guests: Number(this.state.max_guests),
+            is_public: this.state.is_public,
         };
 
         const res = await createEvent(event);
@@ -105,6 +109,20 @@ class CreatePage extends Component {
                         type="datetime-local"
                         onChange={this.onChangeHandler}
                         label="Date/Time"
+                    />
+                    <Input
+                        name="imageUrl"
+                        value={this.state.imageUrl}
+                        type="text"
+                        onChange={this.onChangeHandler}
+                        label="ImageUrl"
+                    />
+                    <Input
+                        name="max_guests"
+                        value={Number(this.state.max_guests)}
+                        type="number"
+                        onChange={this.onChangeHandler}
+                        label="Maximum guests"
                     />
                     <div>
                         <label>Public or private event?

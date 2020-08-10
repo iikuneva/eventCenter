@@ -14,6 +14,8 @@ class EditPage extends Component {
                 address: '',
                 category: '',
                 date_time: '',
+                imageUrl: '',
+                max_guests: '',
                 is_public: true
         };
 
@@ -36,6 +38,8 @@ class EditPage extends Component {
             address: defaultEvent.address,
             category: defaultEvent.category,
             date_time: defaultEvent.date_time,
+            imageUrl: defaultEvent.imageUrl,
+            max_guests: defaultEvent.max_guests,
             is_public: defaultEvent.is_public
         });
     }
@@ -59,6 +63,8 @@ class EditPage extends Component {
             address: this.state.address,
             category: this.state.category,
             date_time: this.state.date_time,
+            imageUrl: this.state.imageUrl,
+            max_guests: this.state.max_guests,
             is_public: this.state.is_public
         };
         let eventid = this.props.match.params.eventid;
@@ -123,6 +129,20 @@ class EditPage extends Component {
                         type="datetime-local"
                         onChange={this.onChangeHandler}
                         label="Date/Time"
+                    />
+                     <Input
+                        name="imageUrl"
+                        value={this.state.imageUrl}
+                        type="text"
+                        onChange={this.onChangeHandler}
+                        label="ImageUrl"
+                    />
+                    <Input
+                        name="max_guests"
+                        value={Number(this.state.max_guests)}
+                        type="number"
+                        onChange={this.onChangeHandler}
+                        label="Maximum guests"
                     />
                     <div>
                         <label>Public or private event?
