@@ -43,14 +43,14 @@ class CreatePage extends Component {
             description: this.state.description,
             address: this.state.address,
             category: this.state.category,
-            date_time: this.state.date_time,
+            date_time: new Date(this.state.date_time),
             imageUrl: this.state.imageUrl,
             max_guests: Number(this.state.max_guests),
             is_public: this.state.is_public,
         };
-
+        console.log(event)
         const res = await createEvent(event);
-        // console.log(res)
+        console.log(res)
         let eventid = res.objectId;
         this.props.history.push(`/data/event/${eventid}`);
     }

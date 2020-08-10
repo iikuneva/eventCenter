@@ -25,18 +25,15 @@ const App = () => {
   const context = useContext(UserContext)
   const loggedIn = context.user && context.user.loggedIn;
 
+
   return (
     <div className="App">
       <Header />
       <Switch>
         <Route path="/" exact component={HomePage} />
         <Route path="/about" component={AboutPage} />
-        <Route exact path="/users/register">
-          {loggedIn ? (<Redirect to="/" />) : (<RegisterPage />)}
-        </Route>
-        <Route exact path="/users/login">
-          {loggedIn ? (<Redirect to="/" />) : (<LoginPage />)}
-        </Route>
+        <Route exact path="/users/register" component={RegisterPage} />
+        <Route exact path="/users/login" component={LoginPage} />
         <Route exact path="/users/profile">
           {loggedIn ? (<ProfilePage />) : (<Redirect to="/users/login" />)}
         </Route>

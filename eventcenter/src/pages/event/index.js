@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Input from '../../components/input'
 import { getEventById, deleteEvent, guestConfirmation, getAllGuestsByEventId, guestRejection } from '../../rest_api/js/data.js';
-import images from '../../utils/imgMap.js'
-import { joinEvent, getCoutJoinedUsersByEventId } from '../../rest_api/js/data';
+import images from '../../utils/imgMap';
+import { joinEvent } from '../../rest_api/js/data';
 import UserContext from '../../Context';
+import { Link } from 'react-router-dom';
 
 
 class EventPage extends Component {
@@ -14,7 +15,6 @@ class EventPage extends Component {
         this.state = {
             event: false,
             guestEmail: '',
-            role: ''
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -38,9 +38,8 @@ class EventPage extends Component {
     async getData() {
         const event = await getEventById(this.props.match.params.eventid);
         this.setState({ event });
-
+        console.log(event)
     }
-
 
     atendeeHandler(e) {
         let eventid = this.props.match.params.eventid;
@@ -54,18 +53,6 @@ class EventPage extends Component {
 
     async onJoinHandler(e) {
         let eventid = this.props.match.params.eventid;
-        // let count = await getCoutJoinedUsersByEventId(eventid);
-
-        // const joinedUsers = this.state.event.users_id; //event.users_id.length < event.max_guests
-
-        // const countUsers = joinedUsers.length;
-        // const userid = this.context.user.objectId
-        // let isAlreadyJoined = joinedUsers.find(u => u.objectId === userid);//event.users_id.find(u => u.objectId ===  this.context.user.objectId
-
-        // if (!isAlreadyJoined && countUsers < this.state.event.max_guests) {
-        //     await joinEvent(eventid);
-        // }
-
         await joinEvent(eventid);
     }
 
@@ -116,79 +103,87 @@ class EventPage extends Component {
 
 
     render() {
-        let main = <p>Loading &hellip;</p>;
+
+        let main = <div><Link to="/users/login"><strong>Login</strong> to join event!</Link></div>;
+
         const event = this.state.event;
+        const loggedIn = this.context.user && this.context.user.loggedIn;
 
-        if (this.context.user.objectId === event.ownerId && event.is_public) {
-            main = (
-                <div>
+        if (loggedIn) {
+            if ((this.context.user.objectId === event.ownerId) && event.is_public) {
+                main = (
                     <div>
-                        <button onClick={this.joinListHandler}>Joined List</button>
-                        <button onClick={this.onEditHandler}>Edit event</button>
-                        <button onClick={this.deleteHandler}>Delete event</button>
-                    </div>
-                </div>
-            )
-        } else if (this.context.user.objectId === event.ownerId && !event.is_public) {
-            main = (
-                <div>
-
-                    <div>
-                        <button onClick={this.atendeeHandler}>Atendee List</button>
-                        <button onClick={this.onEditHandler}>Edit event</button>
-                        <button onClick={this.deleteHandler}>Delete event</button>
-                    </div>
-                </div>
-            )
-        } else if (this.context.user.objectId !== event.ownerId && event.is_public) {
-            if (event.users_id.length < event.max_guests) {
-                if (event.users_id.find(u => u.objectId !== this.context.user.objectId)) {
-                    main = (
                         <div>
-                            <button onClick={this.onJoinHandler}>Join</button>
+                            <button onClick={this.joinListHandler}>Joined List</button>
+                            <button onClick={this.onEditHandler}>Edit event</button>
+                            <button onClick={this.deleteHandler}>Delete event</button>
                         </div>
-                    )
+                    </div>
+                )
+            } else if ((this.context.user.objectId === event.ownerId) && !event.is_public) {
+                main = (
+                    <div>
+                        <div>
+                            <button onClick={this.atendeeHandler}>Atendee List</button>
+                            <button onClick={this.onEditHandler}>Edit event</button>
+                            <button onClick={this.deleteHandler}>Delete event</button>
+                        </div>
+                    </div>
+                )
+            } else if ((this.context.user.objectId !== event.ownerId) && event.is_public) {
+                if (event.users_id.length < Number(event.max_guests)) {
+                    if (!event.users_id.find(u => u.objectId === this.context.user.objectId)) {
+                        main = (
+                            <div>
+                                {/* //след натискане на бутона трябва да се презареди страницата и да покаже already joined */}
+                                <button onClick={this.onJoinHandler}>Join</button>
+                            </div>
+                        )
+                    } else {
+                        main = (
+                            <div>
+                                <h3>You have already joined this public event!</h3>
+                            </div>
+                        )
+                    }
                 } else {
                     main = (
                         <div>
-                            <h3>You have already joined this public event!</h3>
+                            <h3>This public event is fully booked!</h3>
                         </div>
                     )
                 }
-            } else {
+            }
+        } else {
+            if (!event.is_public) { //!event.ownerId (!loggedIn && !event.ownerId && !event.is_public)
                 main = (
                     <div>
-                        <h3>This public event is fully booked!</h3>
+                        <form onSubmit={this.onSubmitHandler}>
+                            <Input
+                                name="guestEmail"
+                                value={this.state.guestEmail}
+                                onChange={this.onChangeHandler}
+                                label="To send response, please type your email here "
+                            />
+                            <button onClick={this.onConfirmHandler}>Confirm</button>
+                            <button onClick={this.onRejectHandler}>Reject</button>
+                        </form>
                     </div>
                 )
             }
-        } else if (!event.ownerId && !event.is_public) { //!event.ownerId
-            main = (
-                <div>
-                    <form onSubmit={this.onSubmitHandler}>
-                        <Input
-                            name="guestEmail"
-                            value={this.state.guestEmail}
-                            onChange={this.onChangeHandler}
-                            label="To send response, please type your email here "
-                        />
-                        <button onClick={this.onConfirmHandler}>Confirm</button>
-                        <button onClick={this.onRejectHandler}>Reject</button>
-                    </form>
-                </div>
-            )
         }
+
 
         return (
             <div className="container">
                 <div className="eventPage">
                     <div>
-                        <img alt={event.category} src={`${event.imageUrl}` || `${images[event.category]}`} />
+                        <img alt={event.category} src={event.imageUrl || images[event.category]} />
                     </div>
                     <h1>{event.name}</h1>
                     <h3>Location name: {event.location_name}</h3>
                     <h3>Location address: {event.address}</h3>
-                    <h3>Date/time: {event.date_time}</h3>
+                    <h3>Date/time: {(new Date(event.date_time)).toLocaleString()}</h3>
                     <p>{event.description}</p>
                 </div>
                 {main}

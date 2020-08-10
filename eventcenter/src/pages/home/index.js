@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getAllPublicEvents } from '../../rest_api/js/data';
-import EventList from '../../components/eventsList';
+import EventsList from '../../components/eventsList';
 import Input from '../../components/input'
 
 export class HomePage extends Component {
@@ -21,8 +21,9 @@ export class HomePage extends Component {
     }
 
     async getData() {
-        const data = await getAllPublicEvents();
-        const events = await data.json();
+        let events = await getAllPublicEvents();
+        events.sort((a, b) => b.date_time - a.date_time);
+        events = events.slice(0, 5);
         this.setState({ events });
     }
 
@@ -32,11 +33,9 @@ export class HomePage extends Component {
 
     async onSubmitHandler(e) {
         e.preventDefault();
-        const {searchString} = this.state;
-        console.log(searchString)
-        const data = await getAllPublicEvents();
-        let allEvents = await data.json();
-        
+        const { searchString } = this.state;
+        const allEvents = await getAllPublicEvents();
+
         let events = allEvents.filter(e => e.name.toLowerCase().includes(searchString.toLowerCase()) ||
             e.category.toLowerCase().includes(searchString.toLowerCase()) ||
             e.description.toLowerCase().includes(searchString.toLowerCase()) ||
@@ -44,7 +43,7 @@ export class HomePage extends Component {
         this.setState({ events });
     }
 
-  
+
 
     render() {
         return (
@@ -87,8 +86,12 @@ export class HomePage extends Component {
                         />
                         <button>Search public events</button>
                     </form>
-                    <EventList events={this.state.events} />
-
+                    <div>
+                        <h1>Public events</h1>
+                        {this.state.events.length === 0 ?
+                            <p>There are no events &hellip;</p> :
+                            <EventsList events={this.state.events} />}
+                    </div>
                 </div>
             </div>
         );

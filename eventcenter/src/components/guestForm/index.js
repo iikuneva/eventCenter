@@ -32,6 +32,9 @@ class GuestForm extends Component {
             is_attending: false
         }
         this.props.addGuestToList(guest);
+
+        this.state.name = '';
+        this.state.email = '';
     }
 
     render() {

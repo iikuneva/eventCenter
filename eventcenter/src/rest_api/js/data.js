@@ -388,21 +388,21 @@ export async function guestRejection(guestid) {
 
 //get all public events by date
 export async function getAllPublicEvents(){
-    const result = fetch(host(endpoints.EVENT + `?where=is_public%3D%27true%27` + `?sortBy=date_time%20desc%2`), {
+    const result = await fetch(host(endpoints.EVENT + `?where=is_public%3Dtrue`), {
         headers: {
             'Content-Type': 'application/json'
         }
     });
 
-    // const data = await result.json();
+    const data = await result.json();
 
-    // if (data.hasOwnProperty('errorData')) {
-    //     const error = new Error();
-    //     Object.assign(error, data);
-    //     throw error;
-    // }
-    return result;
-    // return data;
+    if (data.hasOwnProperty('errorData')) {
+        const error = new Error();
+        Object.assign(error, data);
+        throw error;
+    }
+  
+    return data;
 }
 
 export async function joinEvent(eventid){

@@ -30,7 +30,7 @@ class ProfilePage extends Component {
             <div>
                 <h1>My events</h1>
                 {this.state.events.length === 0 ?
-                    <p>Loading &hellip;</p> :
+                    <p>There are no created events &hellip;</p> :
                     <EventsList events={this.state.events} />}
             </div>
         );

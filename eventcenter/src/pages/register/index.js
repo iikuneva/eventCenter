@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Input from '../../components/input';
-import { register } from '../../rest_api/js/data.js';
+import { register, login } from '../../rest_api/js/data.js';
 import { withRouter } from 'react-router-dom';
 import UserContext from '../../Context';
 
@@ -13,8 +13,7 @@ class RegisterPage extends Component {
             name: '',
             email: '',
             password: '',
-            repeat: '',
-            error: false
+            repeat: ''
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -36,15 +35,20 @@ class RegisterPage extends Component {
             password
         } = this.state;
 
-        const result = await register(name, email, password);
-        if (!result.success) {
-            this.setState({error: result}); //?
+        const resultRegister = await register(name, email, password);
+        
+        if (!resultRegister.created) {
             return;
         }
 
-        this.context.logIn(result);
+        const resultLogin = await login(email, password);
+    
+        if (!resultLogin.created) {
+            return;
+        }
 
-        this.props.history.push('/users/login');
+        this.context.logIn(resultLogin);
+        this.props.history.push('/');
     }
 
     render() {
