@@ -19,16 +19,12 @@ const LoginPage = () => {
 
         try {
             if (email.length === 0 || password.length === 0) {
-                setError({
-                    error: { message: 'All inputs are required!' }
-                });
+                setError('All inputs are required!');
                 return;
             }
             const result = await login(email, password);
             if (result.hasOwnProperty('errorData')) {
-                setError({
-                    error: { message: result.message }
-                })
+                setError(result.message)
                 return;
             }
 
@@ -37,23 +33,19 @@ const LoginPage = () => {
 
         } catch (e) {
             console.error(e);
-            setError({
-                error: { message: e.message }
-            })
+            setError(e.message)
         }
     }
 
-    console.log(error);
 
     let errors = null;
     if (error) {
         errors = (
             <div className={styles.errorMessage}>
-                <p>{error.message}</p>
+                <p>{error}</p>
             </div>
         );
     }
-    console.log(errors)
 
     return (
         <div className="container">

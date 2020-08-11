@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Input from '../../components/input';
 import { createEvent } from '../../rest_api/js/data.js';
+import styles from './index.module.css';
+
 
 class CreatePage extends Component {
     constructor(props) {
@@ -42,23 +44,74 @@ class CreatePage extends Component {
             location_name: this.state.location_name,
             description: this.state.description,
             address: this.state.address,
-            category: this.state.category,
-            date_time: new Date(this.state.date_time),
+            category: this.state.category || 'party',
+            date_time: (new Date(this.state.date_time) || (Date.now())),
             imageUrl: this.state.imageUrl,
             max_guests: Number(this.state.max_guests),
-            is_public: this.state.is_public,
+            is_public: this.state.is_public || true,
         };
-        console.log(event)
-        const res = await createEvent(event);
-        console.log(res)
-        let eventid = res.objectId;
-        this.props.history.push(`/data/event/${eventid}`);
+        console.log(event);
+
+        try {
+            if (event.name.length === 0) {
+                this.setState({
+                    error: { message: "Event name is required!" }
+                });
+                return;
+            }
+            if (event.description.length === 0) {
+                this.setState({
+                    error: { message: 'Event description is required!' }
+                });
+                return;
+            }
+            if (event.location_name.length === 0 || event.address.length === 0) {
+                this.setState({
+                    error: { message: 'Location name and address are required!' }
+                });
+                return;
+            }
+            if (event.date_time <= (Date.now())) {
+                this.setState({
+                    error: { message: 'Date must be in the future!'}
+                });
+                return;
+            }
+
+            const res = await createEvent(event);
+            if (res.hasOwnProperty('errorData')) {
+                this.setState({
+                    error: { message: res.message }
+                })
+                return;
+            }
+
+            let eventid = res.objectId;
+            this.props.history.push(`/data/event/${eventid}`);
+
+        } catch (e) {
+            console.error(e);
+            this.setState({
+                error: { message: e.message }
+            })
+        }
+
     }
 
     render() {
+        let errors = null;
+        if (this.state.error) {
+            errors = (
+                <div className={styles.errorMessage}>
+                    <p>{this.state.error.message}</p>
+                </div>
+            );
+        }
+
         return (
             <div>
                 <h1>Create event</h1>
+                {errors}
                 <form onSubmit={this.onSubmitHandler}>
                     <Input
                         name='name'

@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Input from '../../components/input';
 import { getEventById, updateEvent } from '../../rest_api/js/data.js';
+import styles from './index.module.css';
+
 
 class EditPage extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-                name: '',
-                location_name: '',
-                description: '',
-                address: '',
-                category: '',
-                date_time: '',
-                imageUrl: '',
-                max_guests: '',
-                is_public: true
+            name: '',
+            location_name: '',
+            description: '',
+            address: '',
+            category: '',
+            date_time: '',
+            imageUrl: '',
+            max_guests: '',
+            is_public: true,
+            error: false
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -31,7 +34,7 @@ class EditPage extends Component {
     async getData() {
         const defaultEvent = await getEventById(this.props.match.params.eventid);
 
-        this.setState({ 
+        this.setState({
             name: defaultEvent.name,
             location_name: defaultEvent.location_name,
             description: defaultEvent.description,
@@ -62,23 +65,73 @@ class EditPage extends Component {
             description: this.state.description,
             address: this.state.address,
             category: this.state.category,
-            date_time: this.state.date_time,
+            date_time: (new Date(this.state.date_time) || (Date.now())),
             imageUrl: this.state.imageUrl,
             max_guests: this.state.max_guests,
-            is_public: this.state.is_public
+            is_public: this.state.is_public || true
         };
-        let eventid = this.props.match.params.eventid;
-        await updateEvent(eventid, updatedEvent);
-        this.setState({ updatedEvent });
 
-        this.props.history.push(`/data/event/${eventid}`);
+        try {
+            if (updatedEvent.name.length === 0) {
+                this.setState({
+                    error: { message: "Event name is required!" }
+                });
+                return;
+            }
+            if (updatedEvent.description.length === 0) {
+                this.setState({
+                    error: { message: 'Event description is required!' }
+                });
+                return;
+            }
+            if (updatedEvent.location_name.length === 0 || updatedEvent.address.length === 0) {
+                this.setState({
+                    error: { message: 'Location name and address are required!' }
+                });
+                return;
+            }
+            if (updatedEvent.date_time <= (Date.now())) {
+                this.setState({
+                    error: { message: 'Date must be in the future!' }
+                });
+                return;
+            }
+
+            let eventid = this.props.match.params.eventid;
+            const res = await updateEvent(eventid, updatedEvent);
+            if (res.hasOwnProperty('errorData')) {
+                this.setState({
+                    error: { message: res.message }
+                })
+                return;
+            }
+
+            this.setState({ updatedEvent });
+
+            this.props.history.push(`/data/event/${eventid}`);
+
+        } catch (e) {
+            console.error(e);
+            this.setState({
+                error: { message: e.message }
+            })
+        }
+
     }
 
     render() {
-
+        let errors = null;
+        if (this.state.error) {
+            errors = (
+                <div className={styles.errorMessage}>
+                    <p>{this.state.error.message}</p>
+                </div>
+            );
+        }
         return (
             <div>
                 <h1>Edit event</h1>
+                {errors}
                 <form onSubmit={this.onSubmitHandler}>
                     <Input
                         name='name'
@@ -130,7 +183,7 @@ class EditPage extends Component {
                         onChange={this.onChangeHandler}
                         label="Date/Time"
                     />
-                     <Input
+                    <Input
                         name="imageUrl"
                         value={this.state.imageUrl}
                         type="text"

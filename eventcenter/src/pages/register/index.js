@@ -30,7 +30,13 @@ class RegisterPage extends Component {
 
     async onSubmitHandler(e) {
         e.preventDefault();
-     
+
+        const {
+            name,
+            email,
+            password
+        } = this.state;
+
         try {
             if (this.state.password !== this.state.repeat) {
                 this.setState({
@@ -51,13 +57,8 @@ class RegisterPage extends Component {
                 return;
             }
 
-            const {
-                name,
-                email,
-                password
-            } = this.state;
-
             const resultRegister = await register(name, email, password);
+
             if (resultRegister.hasOwnProperty('errorData')) {
                 this.setState({
                     error: { message: resultRegister.message }
@@ -66,6 +67,7 @@ class RegisterPage extends Component {
             }
 
             const resultLogin = await login(email, password);
+            
             if (resultLogin.hasOwnProperty('errorData')) {
                 this.setState({
                     error: { message: resultLogin.message }
