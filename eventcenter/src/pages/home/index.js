@@ -91,6 +91,7 @@ export class HomePage extends Component {
                     </form>
                     <div>
                         <h1>Public events</h1>
+                        <h3>Everyone is welcomed to join</h3>
                         {this.state.events.length === 0 ?
                             <p>There are no events &hellip;</p> :
                             <EventsList events={this.state.events} />}

@@ -48,7 +48,7 @@ class CreatePage extends Component {
             date_time: (new Date(this.state.date_time) || (Date.now())),
             imageUrl: this.state.imageUrl,
             max_guests: Number(this.state.max_guests),
-            is_public: this.state.is_public || true,
+            is_public: this.state.is_public,
         };
         console.log(event);
 

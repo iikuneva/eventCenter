@@ -15,6 +15,11 @@ class EventPage extends Component {
         this.state = {
             event: false,
             guestEmail: '',
+            titleConfirm: 'Confirm',
+            titleReject: 'Reject',
+            titleJoin: 'Join',
+            submittingJoin: false,
+            submittingAnswer: false
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -54,6 +59,9 @@ class EventPage extends Component {
     async onJoinHandler(e) {
         let eventid = this.props.match.params.eventid;
         await joinEvent(eventid);
+
+        this.setState({ titleJoin: 'You joined successfully' });
+        this.setState({ submittingJoin: true });
     }
 
     async deleteHandler(e) {
@@ -87,6 +95,8 @@ class EventPage extends Component {
         let [guestid] = guest.map(o => o.objectId);
         // console.log(guestid);
         await guestConfirmation(guestid);
+        this.setState({ titleConfirm: 'You confirmed successfully' });
+        this.setState({ submittingAnswer: true });
     }
 
     async onRejectHandler() {
@@ -99,6 +109,9 @@ class EventPage extends Component {
         let guest = allGuests.filter(g => g.email === guestEmail);
         let [guestid] = guest.map(o => o.objectId);
         await guestRejection(guestid);
+        this.setState({ titleReject: 'You rejected successfully' });
+        this.setState({ submittingAnswer: true });
+
     }
 
 
@@ -136,7 +149,7 @@ class EventPage extends Component {
                         main = (
                             <div>
                                 {/* //след натискане на бутона трябва да се презареди страницата и да покаже already joined */}
-                                <button onClick={this.onJoinHandler}>Join</button>
+                                <button onClick={this.onJoinHandler} disabled={this.state.submittingJoin}>{this.state.titleJoin}</button>
                             </div>
                         )
                     } else {
@@ -155,7 +168,7 @@ class EventPage extends Component {
                 }
             }
         } else {
-            if (!event.is_public) { //!event.ownerId (!loggedIn && !event.ownerId && !event.is_public)
+            if (!event.is_public) {
                 main = (
                     <div>
                         <form onSubmit={this.onSubmitHandler}>
@@ -165,8 +178,8 @@ class EventPage extends Component {
                                 onChange={this.onChangeHandler}
                                 label="To send response, please type your email here "
                             />
-                            <button onClick={this.onConfirmHandler}>Confirm</button>
-                            <button onClick={this.onRejectHandler}>Reject</button>
+                            <button onClick={this.onConfirmHandler} disabled={this.state.submittingAnswer}>{this.state.titleConfirm}</button>
+                            <button onClick={this.onRejectHandler} disabled={this.state.submittingAnswer}>{this.state.titleReject}</button>
                         </form>
                     </div>
                 )

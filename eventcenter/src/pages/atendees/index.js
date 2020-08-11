@@ -12,7 +12,9 @@ class Atendees extends Component {
 
         this.state = {
             event: false,
-            guests: false
+            guests: false,
+            submitting: false,
+            title: 'Send invitations'
         };
 
         this.deleteGuestHandler = this.deleteGuestHandler.bind(this);
@@ -59,6 +61,8 @@ class Atendees extends Component {
         let port = '3000';
         let eventLink = `http://localhost:${port}/data/event/${eventid}`;
        await sendingEmails(guestsEmails, ownerName, eventName, eventLink);
+       this.setState({submitting: true});
+       this.setState({title: 'You send invitations successfully!'});
     }
 
 
@@ -70,7 +74,7 @@ class Atendees extends Component {
                 <h3>{this.state.event.date_time}</h3>
                 <GuestForm addGuestToList={this.addGuestToList} />
                 <GuestList guests={this.state.guests} deleteGuestHandler={this.deleteGuestHandler} />
-                <button onClick={this.sendEmails}>Send invitations</button>
+        <button disabled={this.state.submitting} onClick={this.sendEmails}>{this.state.title}</button>
             </div>
         )
     }
