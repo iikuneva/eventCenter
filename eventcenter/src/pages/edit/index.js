@@ -33,18 +33,24 @@ class EditPage extends Component {
 
     async getData() {
         const defaultEvent = await getEventById(this.props.match.params.eventid);
-
+        
         this.setState({
             name: defaultEvent.name,
             location_name: defaultEvent.location_name,
             description: defaultEvent.description,
             address: defaultEvent.address,
             category: defaultEvent.category,
-            date_time: defaultEvent.date_time,
+            date_time: this.locDate(defaultEvent.date_time).toISOString().substring(0,16),
             imageUrl: defaultEvent.imageUrl,
             max_guests: defaultEvent.max_guests,
             is_public: defaultEvent.is_public
         });
+    }
+
+    locDate(date){
+        let d = new Date(date);
+        d.setHours(d.getHours() + 3);
+        return d;
     }
 
     onChangeHandler(e) {
@@ -65,10 +71,10 @@ class EditPage extends Component {
             description: this.state.description,
             address: this.state.address,
             category: this.state.category,
-            date_time: (new Date(this.state.date_time) || (Date.now())),
+            date_time: Date.parse(this.state.date_time),
             imageUrl: this.state.imageUrl,
             max_guests: this.state.max_guests,
-            is_public: this.state.is_public || true
+            is_public: this.state.is_public
         };
 
         try {
@@ -90,7 +96,7 @@ class EditPage extends Component {
                 });
                 return;
             }
-            if (updatedEvent.date_time <= (Date.now())) {
+            if (updatedEvent.date_time <= Date.now()) {
                 this.setState({
                     error: { message: 'Date must be in the future!' }
                 });

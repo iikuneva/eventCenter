@@ -11,7 +11,8 @@ export class HomePage extends Component {
 
         this.state = {
             events: [],
-            searchString: ''
+            searchEvents: [],
+            // searchString: '',
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -43,11 +44,26 @@ export class HomePage extends Component {
             e.description.toLowerCase().includes(searchString.toLowerCase()) ||
             e.address.toLowerCase().includes(searchString.toLowerCase()));
         this.setState({ events });
+
+        this.props.history.push({
+            pathname: `/search`,
+            state: {
+                events: this.state.events
+            }
+        });
     }
 
 
+    // this.props.history.push({
+    //     pathname:"/shopdetail",
+    //     state:{
+    //         key:"value"
+    //      }
+    //    });
+
 
     render() {
+
         return (
             <div className="main" >
                 <div className="container">
@@ -72,8 +88,7 @@ export class HomePage extends Component {
                             <option value="Other">Other</option>
                         </select>
                         <div>
-                            {/* <button>CREATE</button> */}
-                             <Link to={'/data/event'}>CREATE</Link>
+                            <Link to={'/data/event'}>CREATE</Link>
                         </div>
                     </div>
                 </div>
@@ -91,7 +106,6 @@ export class HomePage extends Component {
                     </form>
                     <div>
                         <h1>Public events</h1>
-                        <h3>Everyone is welcomed to join</h3>
                         {this.state.events.length === 0 ?
                             <p>There are no events &hellip;</p> :
                             <EventsList events={this.state.events} />}
@@ -105,7 +119,3 @@ export class HomePage extends Component {
 
 export default HomePage;
 
-
-// if (product.title.toLowerCase().includes(this.state.search.toLowerCase()) ||
-//     product.description.toLowerCase().includes(this.state.search.toLowerCase())) {
-//     return (

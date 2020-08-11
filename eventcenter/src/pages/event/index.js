@@ -19,7 +19,9 @@ class EventPage extends Component {
             titleReject: 'Reject',
             titleJoin: 'Join',
             submittingJoin: false,
-            submittingAnswer: false
+            submittingAnswer: false,
+            hideConfirmBtn: false,
+            hideRejectBtn:false
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -97,6 +99,7 @@ class EventPage extends Component {
         await guestConfirmation(guestid);
         this.setState({ titleConfirm: 'You confirmed successfully' });
         this.setState({ submittingAnswer: true });
+        this.setState({ hideRejectBtn: true });
     }
 
     async onRejectHandler() {
@@ -111,6 +114,8 @@ class EventPage extends Component {
         await guestRejection(guestid);
         this.setState({ titleReject: 'You rejected successfully' });
         this.setState({ submittingAnswer: true });
+        this.setState({ hideConfirmBtn: true });
+
 
     }
 
@@ -178,8 +183,8 @@ class EventPage extends Component {
                                 onChange={this.onChangeHandler}
                                 label="To send response, please type your email here "
                             />
-                            <button onClick={this.onConfirmHandler} disabled={this.state.submittingAnswer}>{this.state.titleConfirm}</button>
-                            <button onClick={this.onRejectHandler} disabled={this.state.submittingAnswer}>{this.state.titleReject}</button>
+                            {this.state.hideConfirmBtn ? null : <button onClick={this.onConfirmHandler} disabled={this.state.submittingAnswer}>{this.state.titleConfirm}</button>}
+                            {this.state.hideRejectBtn ? null : <button onClick={this.onRejectHandler} disabled={this.state.submittingAnswer}>{this.state.titleReject}</button>}
                         </form>
                     </div>
                 )

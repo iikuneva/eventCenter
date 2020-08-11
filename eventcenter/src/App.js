@@ -20,6 +20,7 @@ import AtendeesPage from './pages/atendees';
 import JoinedPage from './pages/joined';
 import ErrorPage from './pages/error';
 import UserContext from './Context';
+import SearchPage from './pages/search';
 
 const App = () => {
   const context = useContext(UserContext)
@@ -51,6 +52,7 @@ const App = () => {
           {loggedIn ? (<JoinedPage />) : (<Redirect to="/users/login" />)}
         </Route>
         <Route exact path="/users/logout" component={HomePage} />
+        <Route path="/search" component={SearchPage} />
         <Route component={ErrorPage} />
       </Switch>
       <Footer />

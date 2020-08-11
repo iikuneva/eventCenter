@@ -45,7 +45,7 @@ class CreatePage extends Component {
             description: this.state.description,
             address: this.state.address,
             category: this.state.category || 'party',
-            date_time: (new Date(this.state.date_time) || (Date.now())),
+            date_time: Date.parse(this.state.date_time),
             imageUrl: this.state.imageUrl,
             max_guests: Number(this.state.max_guests),
             is_public: this.state.is_public,
@@ -71,7 +71,7 @@ class CreatePage extends Component {
                 });
                 return;
             }
-            if (event.date_time <= (Date.now())) {
+            if (!event.date_time || event.date_time <= Date.now()) {
                 this.setState({
                     error: { message: 'Date must be in the future!'}
                 });

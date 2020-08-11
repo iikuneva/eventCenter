@@ -7,11 +7,11 @@ class GuestForm extends Component {
         super(props);
 
         this.state = {
-                name: '',
-                email: '',
-                state: 'panding',
-                is_pending: true,
-                is_attending: false
+            name: '',
+            email: '',
+            state: 'panding',
+            is_pending: true,
+            is_attending: false
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -39,21 +39,24 @@ class GuestForm extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onGuestAdd}>
-                <Input
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.onChangeHandler}
-                    label="Name"
-                />
-                <Input
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.onChangeHandler}
-                    label="E-mail"
-                />
-                <button>Add guest</button>
-            </form>
+            <>
+                <p>Enter data for your guests</p>
+                <form onSubmit={this.onGuestAdd}>
+                    <Input
+                        name="name"
+                        value={this.state.name}
+                        onChange={this.onChangeHandler}
+                        label="Name"
+                    />
+                    <Input
+                        name="email"
+                        value={this.state.email}
+                        onChange={this.onChangeHandler}
+                        label="E-mail"
+                    />
+                    <button>Add guest</button>
+                </form>
+            </>
         );
     }
 }

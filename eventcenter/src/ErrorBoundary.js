@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component } from 'react';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -14,18 +14,18 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.log('Component Did Catch is triggered', errorInfo)
+    console.log('Component Did Catch is triggered', errorInfo);
   }
 
 
   render() {
     if (this.state.hasError) {
-      window.location.href = '/error'
-      return null
+      window.location.href = '/error';
+      return null;
     }
 
-    return (this.props.children)
+    return (this.props.children);
   }
 }
 
-export default ErrorBoundary
+export default ErrorBoundary;
