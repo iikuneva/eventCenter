@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { getAllPublicEvents } from '../../rest_api/js/data';
 import EventsList from '../../components/eventsList';
-import Input from '../../components/input'
+import Input from '../../components/input';
+import { Link } from 'react-router-dom';
+
 
 export class HomePage extends Component {
     constructor(props) {
@@ -70,7 +72,8 @@ export class HomePage extends Component {
                             <option value="Other">Other</option>
                         </select>
                         <div>
-                            <button>CREATE</button>
+                            {/* <button>CREATE</button> */}
+                             <Link to={'/data/event'}>CREATE</Link>
                         </div>
                     </div>
                 </div>
