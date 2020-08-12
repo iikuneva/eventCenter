@@ -1,6 +1,7 @@
 .footer {
     margin-top:auto;
     margin-bottom: auto;
+    /* background-color: rgb(210, 234, 227); */
     background-color: #272F3B;
     color: white;
     display: flex;

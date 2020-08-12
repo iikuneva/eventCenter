@@ -67,7 +67,7 @@ class RegisterPage extends Component {
             }
 
             const resultLogin = await login(email, password);
-            
+
             if (resultLogin.hasOwnProperty('errorData')) {
                 this.setState({
                     error: { message: resultLogin.message }
@@ -96,10 +96,10 @@ render() {
     }
 
     return (
-        <div className="container">
+        <div className={styles.form}>
             <h1>Register</h1>
             {errors}
-            <form onSubmit={this.onSubmitHandler}>
+            <form  onSubmit={this.onSubmitHandler}>
                 <Input
                     name="name"
                     value={this.state.name}
@@ -125,9 +125,9 @@ render() {
                     type="password"
                     value={this.state.repeat}
                     onChange={this.onChangeHandler}
-                    label="Repeat password"
+                    label="Re-password"
                 />
-                <button>Register</button>
+                <button className={styles.btn}>Register</button>
             </form>
         </div>
     );

@@ -65,7 +65,7 @@ const LoginPage = () => {
                     onChange={e => setPassword(e.target.value)}
                     label="Password"
                 />
-                <button>Login</button>
+                <button className={styles.btn}>Login</button>
             </form>
         </div>
     );
