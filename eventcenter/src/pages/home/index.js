@@ -58,54 +58,59 @@ export class HomePage extends Component {
 
         return (
             <div className={styles.container}>
-                <div className={styles.main}>
-                    <div>
+                <div className={styles.firstSection}>
+                    <div className={styles.info}>
                         <h1>EVENT CENTER</h1>
                         <h3>It's free, fast and fancy</h3>
                         <p>Start from here...</p>
                     </div>
-                    <div>
-                        <div>
-                            <select className={styles.input}>
-                                <option>Тype of event</option>
-                                <option value="Party">Party</option>
-                                <option value="Birthday">Birthday</option>
-                                <option value="Wedding">Wedding</option>
-                                <option value="Reunion">Reunion</option>
-                                <option value="Festival">Festival</option>
-                                <option value="Concert">Concert</option>
-                                <option value="Seminar">Seminar</option>
-                                <option value="Conference">Conference</option>
-                                <option value="Sporting Event or Competition">Sporting Event or Competition</option>
-                                <option value="Trip">Trip</option>
-                                <option value="Other">Other</option>
-                            </select>
+                    <div className={styles.main}>
+                        <div className={styles.create}>
+                            <div>
+                                <select className={styles.select}>
+                                    <option>Тype of event</option>
+                                    <option value="Party">Party</option>
+                                    <option value="Birthday">Birthday</option>
+                                    <option value="Wedding">Wedding</option>
+                                    <option value="Reunion">Reunion</option>
+                                    <option value="Festival">Festival</option>
+                                    <option value="Concert">Concert</option>
+                                    <option value="Seminar">Seminar</option>
+                                    <option value="Conference">Conference</option>
+                                    <option value="Sporting Event or Competition">Sporting Event or Competition</option>
+                                    <option value="Trip">Trip</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <Link className={styles.link} to={'/data/event'}>CREATE EVENT</Link>
+                            </div>
                         </div>
-                        <div>
-                            <Link className={styles.link} to={'/data/event'}>CREATE YOUR OWN EVENT</Link>
+                        {/* </div> */}
+                        {/* <hr /> */}
+                        <div className={styles.search}>
+                            <form onSubmit={this.onSubmitHandler}>
+                                <Input
+                                    className={styles.input}
+                                    name="searchString"
+                                    type="text"
+                                    value={this.state.search}
+                                    onChange={this.onChangeHandler}
+                                    label="Search"
+                                />
+                                <button className={styles.btn}>SEARCH EVENTS</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <hr />
-                <div className={styles.search}>
-                    <form onSubmit={this.onSubmitHandler}>
-                        <Input
-                            className={styles.input}
-                            name="searchString"
-                            type="text"
-                            value={this.state.search}
-                            onChange={this.onChangeHandler}
-                            label="Search"
-                        />
-                        <button className={styles.btn}>Search public events</button>
-                    </form>
-                    <div>
-                        <h1>Public events</h1>
-                        {this.state.events.length === 0 ?
-                            <p>There are no events &hellip;</p> :
-                            <EventsList events={this.state.events} />}
-                    </div>
+
+                <div className={styles.secondSection}>
+                    <h1>Public events</h1>
+                    {this.state.events.length === 0 ?
+                        <p>There are no events &hellip;</p> :
+                        <EventsList events={this.state.events} />}
                 </div>
+
             </div>
         );
     }

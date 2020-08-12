@@ -9,8 +9,9 @@ class Input extends Component {
         return (
             <div >
                 <label>
-                    {label}
+                    {/* {label} */}
                     <input
+                        placeholder={label}
                         className={styles.input}
                         onChange={onChange}
                         name={name}

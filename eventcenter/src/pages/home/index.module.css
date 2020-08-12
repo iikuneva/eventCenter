@@ -1,34 +1,62 @@
+.container {
+    opacity: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-
-.main {
-    background-image: url('/public/images/home.jpg');
-    background-position: center;
+.firstSection {
+    background: url('/images/donutMedium.jpg');
+    /* background-position: center; */
+    height: 80vh;
+    width: 100%;
     background-size: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
+    font-size: 1.2em;
 }
 
-.container {
-    /* background-color: #272F3B; */
-    /* color: white; */
-    opacity: 90%;
-    padding: 2em;
+.main{
+    width: 50%;
+    height: 40%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+   justify-content: space-between;
+   align-items: baseline;
+   background-color: #272F3B;
+   opacity: 90%;
 }
-/* .info {
+
+.info {
     display: flex;
     flex-direction: column;
     align-items: center;
-} */
+    margin: 2em;
+}
+
+.create{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /* justify-content: space-around; */
+    /* align-content: space-between; */
+}
+
+.search{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+    /* align-content: space-between; */
+}
 
 .btn{
-    width: 50%;
-    height: 3em;
+    width: 80%;
+    height: 2em;
     padding: 1em;
     margin: 1em;
     font-size: 18px;
@@ -38,10 +66,14 @@
     background-color: rgb(210, 234, 227);
 }
 
+.btn:hover{
+    background-color: rgb(120, 194, 173);
+    color:white;
+}
 
 .link{
-    width: 50%;
-    height: 3em;
+    width: 80%;
+    height: 2em;
     padding: 1em;
     margin: 1em;
     font-size: 18px;
@@ -51,23 +83,53 @@
     background-color: rgb(255, 208, 193);
     text-decoration: none;
 }
+
 .link:hover{
     color:white;
     background-color: rgb(255, 173, 146);
 }
 
-
-.btn:hover{
-    background-color: rgb(120, 194, 173);
-    color:white;
-}
-
 .select{
     margin: 1em;
-    width: 50%;
+    width: 80%;
     height: 20px;
     padding: 1em;
-    border-radius: none;
+    border-radius: 10px;
     outline: none;
     border: 1px solid grey;
 }
+
+
+
+/* other */
+
+  
+  /* .background-container {
+    flex: 1;
+    background: hsla(0, 0%, 13%, 0.384);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .background-container>h1 {
+    color: #fff;
+    font-size: 50px;
+  }
+  
+  .background-container a {
+    display: inline-block;
+    color: #212121;
+    text-decoration: none;
+    background: #fff;
+    padding: 10px 25px;
+    font-size: 20px;
+    margin: 50px 20px;
+    transition: transform 0.3s;
+  }
+  
+  .background-container a:hover {
+    transform: scale(1.1);
+  } */ 

@@ -1,5 +1,9 @@
 .App {
+  display: flex;
   text-align: center;
+  flex-direction: column;
+  justify-content: space-between;
+  /* height: 100vw; */
 }
 
 .App-logo {
@@ -13,7 +17,7 @@
   }
 }
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -22,7 +26,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
 .App-link {
   color: #61dafb;
@@ -35,4 +39,10 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
 }
