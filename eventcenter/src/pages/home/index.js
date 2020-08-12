@@ -27,7 +27,7 @@ export class HomePage extends Component {
     async getData() {
         let events = await getAllPublicEvents();
         events.sort((a, b) => b.date_time - a.date_time);
-        events = events.slice(0, 5);
+        events = events.slice(0, 6);
         this.setState({ events });
     }
 
@@ -90,14 +90,16 @@ export class HomePage extends Component {
                         {/* <hr /> */}
                         <div className={styles.search}>
                             <form onSubmit={this.onSubmitHandler}>
-                                <Input
-                                    className={styles.input}
-                                    name="searchString"
-                                    type="text"
-                                    value={this.state.search}
-                                    onChange={this.onChangeHandler}
-                                    label="Search"
-                                />
+                                <div>
+                                    <Input
+                                        // className={styles.input}
+                                        name="searchString"
+                                        type="text"
+                                        value={this.state.search}
+                                        onChange={this.onChangeHandler}
+                                        label="Search"
+                                    />
+                                </div>
                                 <button className={styles.btn}>SEARCH EVENTS</button>
                             </form>
                         </div>
@@ -106,9 +108,11 @@ export class HomePage extends Component {
 
                 <div className={styles.secondSection}>
                     <h1>Public events</h1>
-                    {this.state.events.length === 0 ?
-                        <p>There are no events &hellip;</p> :
-                        <EventsList events={this.state.events} />}
+                    <div className={styles.eventsCards}>
+                        {this.state.events.length === 0 ?
+                            <p>There are no events &hellip;</p> :
+                            <EventsList events={this.state.events} />}
+                    </div>
                 </div>
 
             </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getAllPublicEvents } from '../../rest_api/js/data';
 import EventsList from '../../components/eventsList';
 import Input from '../../components/input';
+import styles from './index.module.css';
 
 export class SearchPage extends Component {
     constructor(props) {
@@ -51,7 +52,7 @@ export class SearchPage extends Component {
                             onChange={this.onChangeHandler}
                             label="Search"
                         />
-                        <button>Search public events</button>
+                        <button className={styles.btn}>Search public events</button>
                     </form>
                     <div>
                         <h1>Public events</h1>

@@ -1,16 +1,12 @@
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 100%;
-    margin-top:auto;
-    margin-bottom: auto;
+    margin: 0;
+    
     /* background-color: rgb(210, 234, 227); */
     background-color: #272F3B;
     color: white;
     display: flex;
     justify-content: center;
-
 }
 
 

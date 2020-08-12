@@ -8,7 +8,7 @@ class Input extends Component {
         const { name, type = 'text', value, onChange, label } = this.props;
         return (
             <div >
-                <label>
+                {/* <label> */}
                     {/* {label} */}
                     <input
                         placeholder={label}
@@ -17,7 +17,7 @@ class Input extends Component {
                         name={name}
                         type={type}
                         value={value} />
-                </label>
+                {/* </label> */}
             </div>
         );
     }

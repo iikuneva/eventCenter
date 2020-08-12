@@ -1,25 +1,44 @@
 .eventCard {
-    display: inline-block;
-    width: 300px;
+    width: 29%;
+    height: 450px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    display: flex; 
     border: 1px solid #696969;
-    padding: 1em;
-    margin: 0.25em 0.5em;
+    margin: 1em;
     text-align: center;
+    
 }
 
 .eventCard>img {
-    width: 90%;
+    width: 100%;
+    max-height: 70%;
 }
 
-.eventCard>a {
-    display: inline-block;
-    padding: 0.1em 0.2em;
-    margin: 0.1em 0.2em;
-    background: #c8c8c8;
-    color: black;
+.linkContainer{
+    margin-bottom: 1.5em;
+}
+
+.link{
+    width: 8em;
+    height: 2em;
+    padding: 0 0.5em ;
+    margin-top: 1em;
+    font-size: 18px;
+    color: grey;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(210, 234, 227);
     text-decoration: none;
 }
 
-.eventCard>a:hover {
-    background: #ececec
+.link:hover{
+    background-color: rgb(120, 194, 173);
 }
+
+
+
+
+
+
