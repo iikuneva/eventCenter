@@ -33,21 +33,21 @@ class EditPage extends Component {
 
     async getData() {
         const defaultEvent = await getEventById(this.props.match.params.eventid);
-        
+
         this.setState({
             name: defaultEvent.name,
             location_name: defaultEvent.location_name,
             description: defaultEvent.description,
             address: defaultEvent.address,
             category: defaultEvent.category,
-            date_time: this.locDate(defaultEvent.date_time).toISOString().substring(0,16),
+            date_time: this.locDate(defaultEvent.date_time).toISOString().substring(0, 16),
             imageUrl: defaultEvent.imageUrl,
             max_guests: defaultEvent.max_guests,
             is_public: defaultEvent.is_public
         });
     }
 
-    locDate(date){
+    locDate(date) {
         let d = new Date(date);
         d.setHours(d.getHours() + 3);
         return d;
@@ -135,7 +135,7 @@ class EditPage extends Component {
             );
         }
         return (
-            <div>
+            <div className={styles.container}>
                 <h1>Edit event</h1>
                 {errors}
                 <form onSubmit={this.onSubmitHandler}>
@@ -148,19 +148,19 @@ class EditPage extends Component {
                     <div>
                         {/* <label> Event Type */}
                         <select className={styles.select} name="category" value={this.state.category} onChange={this.onChangeHandler}>
-                                <option value="party">Тype of event</option>
-                                <option value="party">Party</option>
-                                <option value="birthday">Birthday</option>
-                                <option value="wedding">Wedding</option>
-                                <option value="reunion">Reunion</option>
-                                <option value="festival">Festival</option>
-                                <option value="concert">Concert</option>
-                                <option value="seminar">Seminar</option>
-                                <option value="conference">Conference</option>
-                                <option value="sport">Sporting Event</option>
-                                <option value="trip">Trip</option>
-                                <option value="other">Other</option>
-                            </select>
+                            <option value="party">Тype of event</option>
+                            <option value="party">Party</option>
+                            <option value="birthday">Birthday</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="reunion">Reunion</option>
+                            <option value="festival">Festival</option>
+                            <option value="concert">Concert</option>
+                            <option value="seminar">Seminar</option>
+                            <option value="conference">Conference</option>
+                            <option value="sport">Sporting Event</option>
+                            <option value="trip">Trip</option>
+                            <option value="other">Other</option>
+                        </select>
                         {/* </label> */}
                     </div>
                     <Input
@@ -196,6 +196,7 @@ class EditPage extends Component {
                         onChange={this.onChangeHandler}
                         label="ImageUrl"
                     />
+                    <span>Maximum guests</span>
                     <Input
                         name="max_guests"
                         value={Number(this.state.max_guests)}
@@ -203,8 +204,12 @@ class EditPage extends Component {
                         onChange={this.onChangeHandler}
                         label="Maximum guests"
                     />
-                    <div>
-                        <label>Public or private event?
+                    <div className={styles.formOptions}>
+                        <div>
+                            <label>Public or private event?</label>
+                        </div>
+                        <div>
+                            <span>Public</span>
                             <Input
                                 name="is_public"
                                 type="radio"
@@ -213,6 +218,7 @@ class EditPage extends Component {
                                 onChange={this.onRadioHandler}
                                 label="Public - Anyone can see it."
                             />
+                            <span>Private</span>
                             <Input
                                 name="is_public"
                                 type="radio"
@@ -221,7 +227,7 @@ class EditPage extends Component {
                                 onChange={this.onRadioHandler}
                                 label="Private - Only people who have a link can see it."
                             />
-                        </label>
+                        </div>
                     </div>
                     <button className={styles.btn} >Update event</button>
                 </form>

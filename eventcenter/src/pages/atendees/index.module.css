@@ -1,7 +1,29 @@
 .container{
+    width: 70%;
+    margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.container > form {
+    width: 70%;
+    margin: auto;
+}
+
+form + div {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 70%;
+}
+
+table, th, td {
+    border-bottom: 1px solid darkgray;
 }
 
 .btn{

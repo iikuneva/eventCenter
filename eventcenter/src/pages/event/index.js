@@ -124,7 +124,7 @@ class EventPage extends Component {
 
     render() {
 
-        let main = <div><Link to="/users/login"><strong>Login</strong> to join event!</Link></div>;
+        let main = <div><Link className={styles.link} to="/users/login"><strong>Login</strong> to join event!</Link></div>;
 
         const event = this.state.event;
         const loggedIn = this.context.user && this.context.user.loggedIn;

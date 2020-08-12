@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styles from './index.module.css';
 
 
-
 class Input extends Component {
     render() {
         const { name, type = 'text', value, onChange, label } = this.props;

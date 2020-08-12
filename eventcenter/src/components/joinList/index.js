@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
+import styles from './index.module.css';
+
 
 class JoinList extends Component {
     // constructor(props) {
@@ -8,7 +10,6 @@ class JoinList extends Component {
 
     render() {
         let guests = this.props.guests || [];
-        // console.log(guests)
         return (
             <div>
                 <table>

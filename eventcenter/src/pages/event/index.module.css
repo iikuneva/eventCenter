@@ -35,3 +35,21 @@
     background-color: rgb(255, 173, 146);
     color:white;
 }
+
+.link{
+    width: 80%;
+    height: 1em;
+    padding: 1em;
+    margin: 1em;
+    /* font-size: 18px; */
+    color: grey;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(210, 234, 227);
+    text-decoration: none;
+}
+
+.link:hover{
+    color:white;
+    background-color: rgb(120, 194, 173);
+}

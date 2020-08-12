@@ -100,7 +100,9 @@ export class HomePage extends Component {
                                         label="Search"
                                     />
                                 </div>
-                                <button className={styles.btn}>SEARCH EVENTS</button>
+                                <div>
+                                    <button className={styles.btn}>SEARCH EVENTS</button>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -73,7 +73,7 @@ class CreatePage extends Component {
             }
             if (!event.date_time || event.date_time <= Date.now()) {
                 this.setState({
-                    error: { message: 'Date must be in the future!'}
+                    error: { message: 'Date must be in the future!' }
                 });
                 return;
             }
@@ -109,7 +109,7 @@ class CreatePage extends Component {
         }
 
         return (
-            <div>
+            <div className={styles.container}>
                 <h1>Create event</h1>
                 {errors}
                 <form onSubmit={this.onSubmitHandler}>
@@ -122,19 +122,19 @@ class CreatePage extends Component {
                     <div>
                         {/* <label> Event Type */}
                         <select className={styles.select} name="category" value={this.state.category} onChange={this.onChangeHandler}>
-                                <option value="party">Тype of event</option>
-                                <option value="party">Party</option>
-                                <option value="birthday">Birthday</option>
-                                <option value="wedding">Wedding</option>
-                                <option value="reunion">Reunion</option>
-                                <option value="festival">Festival</option>
-                                <option value="concert">Concert</option>
-                                <option value="seminar">Seminar</option>
-                                <option value="conference">Conference</option>
-                                <option value="sport">Sporting Event</option>
-                                <option value="trip">Trip</option>
-                                <option value="other">Other</option>
-                            </select>
+                            <option value="party">Тype of event</option>
+                            <option value="party">Party</option>
+                            <option value="birthday">Birthday</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="reunion">Reunion</option>
+                            <option value="festival">Festival</option>
+                            <option value="concert">Concert</option>
+                            <option value="seminar">Seminar</option>
+                            <option value="conference">Conference</option>
+                            <option value="sport">Sporting Event</option>
+                            <option value="trip">Trip</option>
+                            <option value="other">Other</option>
+                        </select>
                         {/* </label> */}
                     </div>
                     <Input
@@ -170,16 +170,21 @@ class CreatePage extends Component {
                         onChange={this.onChangeHandler}
                         label="ImageUrl"
                     />
+                    <span>Maximum guests</span>
                     <Input
-                        placeholder="Maximum guests"
+                        // placeholder="Maximum guests"
                         name="max_guests"
                         value={Number(this.state.max_guests)}
                         type="number"
                         onChange={this.onChangeHandler}
                         label="Maximum guests"
                     />
-                    <div>
-                        <label>Public or private event?
+                    <div className={styles.formOptions}>
+                        <div>
+                            <label>Public or private event?</label>
+                        </div>
+                        <div>
+                            <span>Public</span>
                             <Input
                                 label="public"
                                 name="is_public"
@@ -187,17 +192,20 @@ class CreatePage extends Component {
                                 value={true}
                                 checked={this.state.is_public === true}
                                 onChange={this.onRadioHandler}
-                                label="Public - Anyone can see it."
+                                //label="Public - Anyone can see it."
                             />
+                            <span>Private</span>
                             <Input
+                                label="private"
                                 name="is_public"
                                 type="radio"
                                 value={false}
                                 checked={this.state.is_public === false}
                                 onChange={this.onRadioHandler}
-                                label="Private - Only people who have a link can see it."
+                                //label="Private - Only people who have a link can see it."
                             />
-                        </label>
+                        </div>
+
                     </div>
                     <button className={styles.btn}>Create</button>
                 </form>

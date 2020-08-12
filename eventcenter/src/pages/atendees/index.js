@@ -76,7 +76,9 @@ class Atendees extends Component {
                 <h3>{(new Date(this.state.event.date_time)).toLocaleString()}</h3> 
                 <GuestForm addGuestToList={this.addGuestToList} />
                 <GuestList guests={this.state.guests} deleteGuestHandler={this.deleteGuestHandler} />
+                <div>
                 <button className={styles.btn} disabled={this.state.submitting} onClick={this.sendEmails}>{this.state.title}</button>
+                </div>
             </div>
         )
     }
