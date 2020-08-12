@@ -96,7 +96,7 @@ render() {
     }
 
     return (
-        <div className={styles.form}>
+        <div className={styles.container}>
             <h1>Register</h1>
             {errors}
             <form  onSubmit={this.onSubmitHandler}>

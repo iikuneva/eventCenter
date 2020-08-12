@@ -146,8 +146,8 @@ class EditPage extends Component {
                         label='Event name'
                     />
                     <div>
-                        <label> Event Type
-                        <select name="category" value={this.state.category} onChange={this.onChangeHandler}>
+                        {/* <label> Event Type */}
+                        <select className={styles.select} name="category" value={this.state.category} onChange={this.onChangeHandler}>
                                 <option value="party">Тype of event</option>
                                 <option value="party">Party</option>
                                 <option value="birthday">Birthday</option>
@@ -161,7 +161,7 @@ class EditPage extends Component {
                                 <option value="trip">Trip</option>
                                 <option value="other">Other</option>
                             </select>
-                        </label>
+                        {/* </label> */}
                     </div>
                     <Input
                         name="description"
@@ -223,7 +223,7 @@ class EditPage extends Component {
                             />
                         </label>
                     </div>
-                    <button>Update event</button>
+                    <button className={styles.btn} >Update event</button>
                 </form>
             </div>
         );

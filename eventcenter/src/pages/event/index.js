@@ -6,6 +6,8 @@ import images from '../../utils/imgMap';
 import { joinEvent } from '../../rest_api/js/data';
 import UserContext from '../../Context';
 import { Link } from 'react-router-dom';
+import styles from './index.module.css';
+
 
 
 class EventPage extends Component {
@@ -132,9 +134,9 @@ class EventPage extends Component {
                 main = (
                     <div>
                         <div>
-                            <button onClick={this.joinListHandler}>Joined List</button>
-                            <button onClick={this.onEditHandler}>Edit event</button>
-                            <button onClick={this.deleteHandler}>Delete event</button>
+                            <button className={styles.btn} onClick={this.joinListHandler}>Joined List</button>
+                            <button className={styles.btn} onClick={this.onEditHandler}>Edit event</button>
+                            <button className={styles.btn} onClick={this.deleteHandler}>Delete event</button>
                         </div>
                     </div>
                 )
@@ -142,9 +144,9 @@ class EventPage extends Component {
                 main = (
                     <div>
                         <div>
-                            <button onClick={this.atendeeHandler}>Atendee List</button>
-                            <button onClick={this.onEditHandler}>Edit event</button>
-                            <button onClick={this.deleteHandler}>Delete event</button>
+                            <button className={styles.btn} onClick={this.atendeeHandler}>Atendee List</button>
+                            <button className={styles.btn} onClick={this.onEditHandler}>Edit event</button>
+                            <button className={styles.btn} onClick={this.deleteHandler}>Delete event</button>
                         </div>
                     </div>
                 )
@@ -154,7 +156,7 @@ class EventPage extends Component {
                         main = (
                             <div>
                                 {/* //след натискане на бутона трябва да се презареди страницата и да покаже already joined */}
-                                <button onClick={this.onJoinHandler} disabled={this.state.submittingJoin}>{this.state.titleJoin}</button>
+                                <button className={styles.btn} onClick={this.onJoinHandler} disabled={this.state.submittingJoin}>{this.state.titleJoin}</button>
                             </div>
                         )
                     } else {
@@ -183,8 +185,8 @@ class EventPage extends Component {
                                 onChange={this.onChangeHandler}
                                 label="To send response, please type your email here "
                             />
-                            {this.state.hideConfirmBtn ? null : <button onClick={this.onConfirmHandler} disabled={this.state.submittingAnswer}>{this.state.titleConfirm}</button>}
-                            {this.state.hideRejectBtn ? null : <button onClick={this.onRejectHandler} disabled={this.state.submittingAnswer}>{this.state.titleReject}</button>}
+                            {this.state.hideConfirmBtn ? null : <button className={styles.btn} onClick={this.onConfirmHandler} disabled={this.state.submittingAnswer}>{this.state.titleConfirm}</button>}
+                            {this.state.hideRejectBtn ? null : <button  className={styles.btnReject} onClick={this.onRejectHandler} disabled={this.state.submittingAnswer}>{this.state.titleReject}</button>}
                         </form>
                     </div>
                 )

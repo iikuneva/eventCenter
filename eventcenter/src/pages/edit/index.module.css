@@ -13,3 +13,31 @@
     font-style: italic;
     box-shadow: 0 5px 10px #cccccc;
 }
+
+.select{
+    margin: 1em;
+    width: 50%;
+    height: 20px;
+    padding: 1em;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid grey;
+}
+
+.btn{
+    width: 50%;
+    height: 2em;
+    padding: 1em;
+    margin: 1em;
+    font-size: 18px;
+    color: grey;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(210, 234, 227);
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: rgb(120, 194, 173);
+    color:white;
+}

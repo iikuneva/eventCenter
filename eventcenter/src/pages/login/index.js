@@ -48,7 +48,7 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="container">
+        <div className={styles.container}>
             <h1>Login</h1>
             {errors}
             <form onSubmit={onSubmitHandler}>

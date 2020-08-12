@@ -4,6 +4,8 @@ import GuestForm from '../../components/guestForm';
 import GuestList from '../../components/guestList';
 import { getAllGuestsByEventId, getOwnerNameByOwnerId } from '../../rest_api/js/data'
 import { createGuest, setEventGuestId, deleteGuest, sendingEmails } from '../../rest_api/js/data.js';
+import styles from './index.module.css';
+
 
 
 class Atendees extends Component {
@@ -60,21 +62,21 @@ class Atendees extends Component {
         let ownerName = await getOwnerNameByOwnerId();
         let port = '3000';
         let eventLink = `http://localhost:${port}/data/event/${eventid}`;
-       await sendingEmails(guestsEmails, ownerName, eventName, eventLink);
-       this.setState({submitting: true});
-       this.setState({title: 'You send invitations successfully!'});
+        await sendingEmails(guestsEmails, ownerName, eventName, eventLink);
+        this.setState({ submitting: true });
+        this.setState({ title: 'You send invitations successfully!' });
     }
 
 
     render() {
         return (
-            <div>
+            <div className={styles.container}>
                 <h1>Atendees List</h1>
                 <h2>{this.state.event.name}</h2>
-                <h3>{this.state.event.date_time}</h3>
+                <h3>{(new Date(this.state.event.date_time)).toLocaleString()}</h3> 
                 <GuestForm addGuestToList={this.addGuestToList} />
                 <GuestList guests={this.state.guests} deleteGuestHandler={this.deleteGuestHandler} />
-        <button disabled={this.state.submitting} onClick={this.sendEmails}>{this.state.title}</button>
+                <button className={styles.btn} disabled={this.state.submitting} onClick={this.sendEmails}>{this.state.title}</button>
             </div>
         )
     }

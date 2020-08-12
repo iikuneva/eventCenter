@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color:grey;
-  font-size: 16px;
+  /* font-size: 16px; */
   /* display: flex;
   flex-direction: colum;
   justify-content: space-between; */

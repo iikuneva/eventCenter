@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
+import styles from './index.module.css';
+
 
 class GuestList extends Component {
     constructor(props) {
@@ -22,7 +24,7 @@ class GuestList extends Component {
         let guests = this.props.guests || [];
         // console.log(guests)
         return (
-            <div>
+            <div className={styles.table}>
                 <table>
                     <tbody>
                         <tr>
@@ -38,7 +40,7 @@ class GuestList extends Component {
                                         <td><h4>{guest.name}</h4></td>
                                         <td><h4>{guest.email}</h4></td>
                                         <td><h4>{this.setStatusGuest(guest)}</h4></td>
-                                        <td><button onClick={() => this.props.deleteGuestHandler(guest.objectId)}>Delete</button></td>
+                                        <td><button className={styles.btnDel} onClick={() => this.props.deleteGuestHandler(guest.objectId)}>Delete</button></td>
                                     </tr>
                                 </Fragment>
                             );

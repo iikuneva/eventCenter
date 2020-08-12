@@ -120,8 +120,8 @@ class CreatePage extends Component {
                         label='Event name'
                     />
                     <div>
-                        <label> Event Type
-                        <select name="category" value={this.state.category} onChange={this.onChangeHandler}>
+                        {/* <label> Event Type */}
+                        <select className={styles.select} name="category" value={this.state.category} onChange={this.onChangeHandler}>
                                 <option value="party">Тype of event</option>
                                 <option value="party">Party</option>
                                 <option value="birthday">Birthday</option>
@@ -135,7 +135,7 @@ class CreatePage extends Component {
                                 <option value="trip">Trip</option>
                                 <option value="other">Other</option>
                             </select>
-                        </label>
+                        {/* </label> */}
                     </div>
                     <Input
                         name="description"
@@ -171,6 +171,7 @@ class CreatePage extends Component {
                         label="ImageUrl"
                     />
                     <Input
+                        placeholder="Maximum guests"
                         name="max_guests"
                         value={Number(this.state.max_guests)}
                         type="number"
@@ -180,6 +181,7 @@ class CreatePage extends Component {
                     <div>
                         <label>Public or private event?
                             <Input
+                                label="public"
                                 name="is_public"
                                 type="radio"
                                 value={true}
@@ -197,7 +199,7 @@ class CreatePage extends Component {
                             />
                         </label>
                     </div>
-                    <button>Create</button>
+                    <button className={styles.btn}>Create</button>
                 </form>
             </div>
         );
