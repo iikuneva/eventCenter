@@ -1,11 +1,12 @@
 .eventCard {
-    width: 29%;
-    height: 600px;
+    width: 27%;
+    height: 500px;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     display: flex; 
     border: 1px solid #696969;
+    border-radius: 10px;
     margin: 1em;
     text-align: center;
     
@@ -15,7 +16,8 @@
     width: 100%;
     /* max-height: 70%; */
     height: auto;
-    /* object-fit: contain; */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .linkContainer{
@@ -38,7 +40,10 @@
 .link:hover{
     background-color: rgb(120, 194, 173);
 }
-
+/* 
+.info{
+  padding: 0;  
+} */
 
 
 

@@ -41,20 +41,20 @@ export class SearchPage extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className={styles.container}>
                 <h2>SEARCH PAGE </h2>
                 <div>
-                    <form onSubmit={this.onSubmitHandler}>
+                    <form className={styles.formSearch} onSubmit={this.onSubmitHandler}>
                         <Input
                             name="searchString"
                             type="text"
                             value={this.state.search}
                             onChange={this.onChangeHandler}
-                            label="Search"
+                            placeholder="Search"
                         />
                         <button className={styles.btn}>Search public events</button>
                     </form>
-                    <div>
+                    <div className={styles.divSearched}>
                         <h1>Public events</h1>
                         {this.state.events.length === 0 ?
                             <h2>There are no events &hellip;</h2> :

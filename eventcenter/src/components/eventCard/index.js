@@ -6,8 +6,10 @@ import images from '../../utils/imgMap.js'
 function EventCard({ eventid, name, category, location_name, date_time, imageUrl }) {
     return (
         <article className={styles.eventCard}>
+
             <img alt={category} src={`${imageUrl}` || `${images[category]}`} />
-            <div>
+
+            <div className={styles.info}>
                 <h1>{name}</h1>
                 <h3>Location name: {location_name}</h3>
                 <h3>Date/time: {(new Date(date_time)).toLocaleString()}</h3>

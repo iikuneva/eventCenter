@@ -104,28 +104,28 @@ render() {
                     name="name"
                     value={this.state.name}
                     onChange={this.onChangeHandler}
-                    label="Name"
+                    placeholder="Name"
                 />
                 <Input
                     name="email"
                     type="email"
                     value={this.state.email}
                     onChange={this.onChangeHandler}
-                    label="E-mail"
+                    placeholder="E-mail"
                 />
                 <Input
                     name="password"
                     type="password"
                     value={this.state.password}
                     onChange={this.onChangeHandler}
-                    label="Password"
+                    placeholder="Password"
                 />
                 <Input
                     name="repeat"
                     type="password"
                     value={this.state.repeat}
                     onChange={this.onChangeHandler}
-                    label="Re-password"
+                    placeholder="Re-password"
                 />
                 <button className={styles.btn}>Register</button>
             </form>

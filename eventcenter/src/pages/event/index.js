@@ -23,7 +23,8 @@ class EventPage extends Component {
             submittingJoin: false,
             submittingAnswer: false,
             hideConfirmBtn: false,
-            hideRejectBtn:false
+            hideRejectBtn: false,
+            error: false
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -47,7 +48,6 @@ class EventPage extends Component {
     async getData() {
         const event = await getEventById(this.props.match.params.eventid);
         this.setState({ event });
-        console.log(event)
     }
 
     atendeeHandler(e) {
@@ -97,11 +97,30 @@ class EventPage extends Component {
         let allGuests = event.guests_id;
         let guest = allGuests.filter(g => g.email === guestEmail);
         let [guestid] = guest.map(o => o.objectId);
-        // console.log(guestid);
-        await guestConfirmation(guestid);
-        this.setState({ titleConfirm: 'You confirmed successfully' });
-        this.setState({ submittingAnswer: true });
-        this.setState({ hideRejectBtn: true });
+        try {
+            if (!guestid) {
+                this.setState({
+                    error: { message: "Invalid email address" }
+                });
+                return;
+            }
+            const result = await guestConfirmation(guestid);
+            if (result.hasOwnProperty('errorData')) {
+                this.setState({
+                    error: { message: result.message }
+                })
+                return;
+            }
+            this.setState({ error: false})
+            this.setState({ titleConfirm: 'You confirmed successfully' });
+            this.setState({ submittingAnswer: true });
+            this.setState({ hideRejectBtn: true });
+        } catch (e) {
+            console.error(e);
+            this.setState({
+                error: { message: e.message }
+            })
+        }
     }
 
     async onRejectHandler() {
@@ -113,17 +132,44 @@ class EventPage extends Component {
         let allGuests = event.guests_id;
         let guest = allGuests.filter(g => g.email === guestEmail);
         let [guestid] = guest.map(o => o.objectId);
-        await guestRejection(guestid);
-        this.setState({ titleReject: 'You rejected successfully' });
-        this.setState({ submittingAnswer: true });
-        this.setState({ hideConfirmBtn: true });
 
-
+        try {
+            if (!guestid) {
+                this.setState({
+                    error: { message: "Invalid email address" }
+                });
+                return;
+            }
+            const result = await guestRejection(guestid);
+            if (result.hasOwnProperty('errorData')) {
+                this.setState({
+                    error: { message: result.message }
+                })
+                return;
+            }
+            this.setState({ error: false})
+            this.setState({ titleReject: 'You rejected successfully' });
+            this.setState({ submittingAnswer: true });
+            this.setState({ hideConfirmBtn: true });
+        } catch (e) {
+            console.error(e);
+            this.setState({
+                error: { message: e.message }
+            })
+        }
     }
 
 
     render() {
-
+        let errors = null;
+        if (this.state.error) {
+            errors = (
+                <div className={styles.errorMessage}>
+                    <p>{this.state.error.message}</p>
+                </div>
+            );
+        }
+        // let main = <p>Loading...</p>
         let main = <div><Link className={styles.link} to="/users/login"><strong>Login</strong> to join event!</Link></div>;
 
         const event = this.state.event;
@@ -155,7 +201,6 @@ class EventPage extends Component {
                     if (!event.users_id.find(u => u.objectId === this.context.user.objectId)) {
                         main = (
                             <div>
-                                {/* //след натискане на бутона трябва да се презареди страницата и да покаже already joined */}
                                 <button className={styles.btn} onClick={this.onJoinHandler} disabled={this.state.submittingJoin}>{this.state.titleJoin}</button>
                             </div>
                         )
@@ -183,10 +228,10 @@ class EventPage extends Component {
                                 name="guestEmail"
                                 value={this.state.guestEmail}
                                 onChange={this.onChangeHandler}
-                                label="To send response, please type your email here "
+                                placeholder="To send response, please type your email here "
                             />
                             {this.state.hideConfirmBtn ? null : <button className={styles.btn} onClick={this.onConfirmHandler} disabled={this.state.submittingAnswer}>{this.state.titleConfirm}</button>}
-                            {this.state.hideRejectBtn ? null : <button  className={styles.btnReject} onClick={this.onRejectHandler} disabled={this.state.submittingAnswer}>{this.state.titleReject}</button>}
+                            {this.state.hideRejectBtn ? null : <button className={styles.btnReject} onClick={this.onRejectHandler} disabled={this.state.submittingAnswer}>{this.state.titleReject}</button>}
                         </form>
                     </div>
                 )
@@ -196,8 +241,9 @@ class EventPage extends Component {
 
         return (
             <div className="container">
+                {errors}
                 <div className="eventPage">
-                    <div>
+                    <div className={styles.imgContainerDiv}>
                         <img alt={event.category} src={event.imageUrl || images[event.category]} />
                     </div>
                     <h1>{event.name}</h1>

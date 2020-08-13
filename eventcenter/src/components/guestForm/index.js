@@ -48,13 +48,13 @@ class GuestForm extends Component {
                         name="name"
                         value={this.state.name}
                         onChange={this.onChangeHandler}
-                        label="Name"
+                        placeholder="Name"
                     />
                     <Input
                         name="email"
                         value={this.state.email}
                         onChange={this.onChangeHandler}
-                        label="E-mail"
+                        placeholder="E-mail"
                     />
                     <button className={styles.btn}>Add guest</button>
                 </form>

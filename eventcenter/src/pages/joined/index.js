@@ -38,9 +38,9 @@ class JoinedPage extends Component {
         return (
             <div className={styles.container}>
                 <div>
-                    <h1>Join List</h1>
-                    <h2>{this.state.event.name}</h2>
-                    <h3>{new Date(this.state.event.date_time).toLocaleString()}</h3>
+                    <h1 className={styles.hJoined}>Join List</h1>
+                    <h2 className={styles.hJoined}>{this.state.event.name}</h2>
+                    <h3 className={styles.hJoined}>{new Date(this.state.event.date_time).toLocaleString()}</h3>
                 </div>
                 <div>
                     <JoinList guests={this.state.guests} />

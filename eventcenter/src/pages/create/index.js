@@ -50,7 +50,7 @@ class CreatePage extends Component {
             max_guests: Number(this.state.max_guests),
             is_public: this.state.is_public,
         };
-        console.log(event);
+        // console.log(event);
 
         try {
             if (event.name.length === 0) {
@@ -117,7 +117,7 @@ class CreatePage extends Component {
                         name='name'
                         value={this.state.name}
                         onChange={this.onChangeHandler}
-                        label='Event name'
+                        placeholder='Event name'
                     />
                     <div>
                         {/* <label> Event Type */}
@@ -141,19 +141,19 @@ class CreatePage extends Component {
                         name="description"
                         value={this.state.description}
                         onChange={this.onChangeHandler}
-                        label="Description"
+                        placeholder="Description"
                     />
                     <Input
                         name="location_name"
                         value={this.state.location_name}
                         onChange={this.onChangeHandler}
-                        label="Location name"
+                        placeholder="Location name"
                     />
                     <Input
                         name="address"
                         value={this.state.address}
                         onChange={this.onChangeHandler}
-                        label="Location address"
+                        placeholder="Location address"
                     />
 
                     <Input
@@ -161,14 +161,14 @@ class CreatePage extends Component {
                         value={this.state.date_time}
                         type="datetime-local"
                         onChange={this.onChangeHandler}
-                        label="Date/Time"
+                        placeholder="Date/Time"
                     />
                     <Input
                         name="imageUrl"
                         value={this.state.imageUrl}
                         type="text"
                         onChange={this.onChangeHandler}
-                        label="ImageUrl"
+                        placeholder="ImageUrl"
                     />
                     <span>Maximum guests</span>
                     <Input
@@ -177,7 +177,7 @@ class CreatePage extends Component {
                         value={Number(this.state.max_guests)}
                         type="number"
                         onChange={this.onChangeHandler}
-                        label="Maximum guests"
+                        // label="Maximum guests"
                     />
                     <div className={styles.formOptions}>
                         <div>
@@ -186,7 +186,7 @@ class CreatePage extends Component {
                         <div>
                             <span>Public</span>
                             <Input
-                                label="public"
+                                // label="public"
                                 name="is_public"
                                 type="radio"
                                 value={true}
@@ -196,7 +196,7 @@ class CreatePage extends Component {
                             />
                             <span>Private</span>
                             <Input
-                                label="private"
+                                // label="private"
                                 name="is_public"
                                 type="radio"
                                 value={false}

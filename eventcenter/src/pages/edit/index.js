@@ -143,7 +143,7 @@ class EditPage extends Component {
                         name='name'
                         value={this.state.name}
                         onChange={this.onChangeHandler}
-                        label='Event name'
+                        placeholder='Event name'
                     />
                     <div>
                         {/* <label> Event Type */}
@@ -167,19 +167,19 @@ class EditPage extends Component {
                         name="description"
                         value={this.state.description}
                         onChange={this.onChangeHandler}
-                        label="Description"
+                        placeholder="Description"
                     />
                     <Input
                         name="location_name"
                         value={this.state.location_name}
                         onChange={this.onChangeHandler}
-                        label="Location name"
+                        placeholder="Location name"
                     />
                     <Input
                         name="address"
                         value={this.state.address}
                         onChange={this.onChangeHandler}
-                        label="Location address"
+                        placeholder="Location address"
                     />
 
                     <Input
@@ -187,14 +187,14 @@ class EditPage extends Component {
                         value={this.state.date_time}
                         type="datetime-local"
                         onChange={this.onChangeHandler}
-                        label="Date/Time"
+                        placeholder="Date/Time"
                     />
                     <Input
                         name="imageUrl"
                         value={this.state.imageUrl}
                         type="text"
                         onChange={this.onChangeHandler}
-                        label="ImageUrl"
+                        placeholder="ImageUrl"
                     />
                     <span>Maximum guests</span>
                     <Input
@@ -202,7 +202,7 @@ class EditPage extends Component {
                         value={Number(this.state.max_guests)}
                         type="number"
                         onChange={this.onChangeHandler}
-                        label="Maximum guests"
+                        // label="Maximum guests"
                     />
                     <div className={styles.formOptions}>
                         <div>
@@ -216,7 +216,7 @@ class EditPage extends Component {
                                 value={true}
                                 checked={this.state.is_public === true}
                                 onChange={this.onRadioHandler}
-                                label="Public - Anyone can see it."
+                                // label="Public - Anyone can see it."
                             />
                             <span>Private</span>
                             <Input
@@ -225,7 +225,7 @@ class EditPage extends Component {
                                 value={false}
                                 checked={this.state.is_public === false}
                                 onChange={this.onRadioHandler}
-                                label="Private - Only people who have a link can see it."
+                                // label="Private - Only people who have a link can see it."
                             />
                         </div>
                     </div>

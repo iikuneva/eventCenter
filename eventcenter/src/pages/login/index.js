@@ -56,14 +56,14 @@ const LoginPage = () => {
                     name="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    label="E-mail"
+                    placeholder="E-mail"
                 />
                 <Input
                     name="password"
                     type="password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
-                    label="Password"
+                    placeholder="Password"
                 />
                 <button className={styles.btn}>Login</button>
             </form>

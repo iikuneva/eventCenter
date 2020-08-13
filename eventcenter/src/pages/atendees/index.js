@@ -32,21 +32,40 @@ class Atendees extends Component {
         let res = await getAllGuestsByEventId(this.props.match.params.eventid);
         let event = await res.json();
         let guests = event.guests_id;
-        // console.log(guests)
 
         this.setState({
             event,
-            guests
+            guests,
+            error: false
         });
     }
 
     async addGuestToList(guest) {
-        let resGuest = await createGuest(guest);
-        let guestid = resGuest.objectId;
-        let eventid = this.props.match.params.eventid;
-
-        await setEventGuestId(guestid, eventid);
-        this.getData();
+        try {
+            // console.log(guest)
+            if (!guest) {
+                this.setState({
+                    error: { message: "Invalid input" }
+                });
+                return;
+            }
+            const resGuest = await createGuest(guest);
+            if (resGuest.hasOwnProperty('errorData')) {
+                this.setState({
+                    error: { message: resGuest.message }
+                })
+                return;
+            }
+            let guestid = resGuest.objectId;
+            let eventid = this.props.match.params.eventid;
+            await setEventGuestId(guestid, eventid);
+            this.getData();
+        } catch (e) {
+            console.error(e);
+            this.setState({
+                error: { message: e.message }
+            })
+        }
     }
 
     async deleteGuestHandler(id) {
@@ -69,15 +88,24 @@ class Atendees extends Component {
 
 
     render() {
+        let errors = null;
+        if (this.state.error) {
+            errors = (
+                <div className={styles.errorMessage}>
+                    <p>{this.state.error.message}</p>
+                </div>
+            );
+        }
         return (
             <div className={styles.container}>
                 <h1>Atendees List</h1>
+                {errors}
                 <h2>{this.state.event.name}</h2>
-                <h3>{(new Date(this.state.event.date_time)).toLocaleString()}</h3> 
+                <h3>{(new Date(this.state.event.date_time)).toLocaleString()}</h3>
                 <GuestForm addGuestToList={this.addGuestToList} />
                 <GuestList guests={this.state.guests} deleteGuestHandler={this.deleteGuestHandler} />
                 <div>
-                <button className={styles.btn} disabled={this.state.submitting} onClick={this.sendEmails}>{this.state.title}</button>
+                    <button className={styles.btn} disabled={this.state.submitting} onClick={this.sendEmails}>{this.state.title}</button>
                 </div>
             </div>
         )

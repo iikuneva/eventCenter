@@ -46,4 +46,6 @@
   padding: 0;
   margin: 0;
   box-sizing: inherit;
+  width: 100%;
+  margin: 0 auto;
 }

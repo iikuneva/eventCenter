@@ -6,6 +6,22 @@
     justify-content: center;
 }
 
+.errorMessage{
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: rgba(238, 74, 74, 0.699);
+    margin: 0 auto;
+    text-align: center;
+    padding: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 6px;
+    color: white;
+    font-style: italic;
+    box-shadow: 0 5px 10px #cccccc;
+}
+
 .container > form {
     width: 70%;
     margin: auto;
@@ -24,6 +40,15 @@ table {
 
 table, th, td {
     border-bottom: 1px solid darkgray;
+}
+th {
+    width: 50%;
+    text-align: center;
+}
+td {
+    width: 50%;
+    padding: 0 0.5em;
+    text-align: left;
 }
 
 .btn{

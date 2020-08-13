@@ -97,7 +97,7 @@ export class HomePage extends Component {
                                         type="text"
                                         value={this.state.search}
                                         onChange={this.onChangeHandler}
-                                        label="Search"
+                                        placeholder="Search"
                                     />
                                 </div>
                                 <div>

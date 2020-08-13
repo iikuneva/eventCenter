@@ -11,9 +11,6 @@ class ProfilePage extends Component {
             events: []
         };
 
-        // this.editEvent = this.editEvent.bind(this);
-        // this.deleteEvent = this.deleteEvent.bind(this);
-        // this.atendeeList = this.atendeeList.bind(this);
     }
     componentDidMount() {
         this.getData();

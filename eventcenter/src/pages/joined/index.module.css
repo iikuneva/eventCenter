@@ -19,9 +19,9 @@
     justify-content: center;
 }
 
-h1 {
+h1.hJoined {
     margin-top: 3em;
 }
-h2, h3 {
+h2.hJoined, h3.hJoined {
     margin: 1em 0;
 }

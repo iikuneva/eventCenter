@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import styles from './index.module.css';
+// import styles from './index.module.css';
 
 
 class JoinList extends Component {

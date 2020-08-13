@@ -4,13 +4,13 @@ import styles from './index.module.css';
 
 class Input extends Component {
     render() {
-        const { name, type = 'text', value, onChange, label } = this.props;
+        const { name, type = 'text', value, onChange, label, placeholder } = this.props;
         return (
             <div >
                 {/* <label> */}
-                    {/* {label} */}
+                    {label}
                     <input
-                        placeholder={label}
+                        placeholder={placeholder}
                         className={styles.input}
                         onChange={onChange}
                         name={name}
