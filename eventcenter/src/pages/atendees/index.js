@@ -5,7 +5,7 @@ import GuestList from '../../components/guestList';
 import { getAllGuestsByEventId, getOwnerNameByOwnerId } from '../../rest_api/js/data'
 import { createGuest, setEventGuestId, deleteGuest, sendingEmails } from '../../rest_api/js/data.js';
 import styles from './index.module.css';
-
+import RegularButton from '../../components/button'
 
 
 class Atendees extends Component {
@@ -42,7 +42,6 @@ class Atendees extends Component {
 
     async addGuestToList(guest) {
         try {
-            // console.log(guest)
             if (!guest) {
                 this.setState({
                     error: { message: "Invalid input" }
@@ -105,7 +104,11 @@ class Atendees extends Component {
                 <GuestForm addGuestToList={this.addGuestToList} />
                 <GuestList guests={this.state.guests} deleteGuestHandler={this.deleteGuestHandler} />
                 <div>
-                    <button className={styles.btn} disabled={this.state.submitting} onClick={this.sendEmails}>{this.state.title}</button>
+                    <RegularButton
+                        title={this.state.title}
+                        disabled={this.state.submitting}
+                        onClick={this.sendEmails}
+                    />
                 </div>
             </div>
         )

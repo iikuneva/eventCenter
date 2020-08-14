@@ -7,16 +7,14 @@ class Input extends Component {
         const { name, type = 'text', value, onChange, label, placeholder } = this.props;
         return (
             <div >
-                {/* <label> */}
-                    {label}
-                    <input
-                        placeholder={placeholder}
-                        className={styles.input}
-                        onChange={onChange}
-                        name={name}
-                        type={type}
-                        value={value} />
-                {/* </label> */}
+                {label}
+                <input
+                    placeholder={placeholder}
+                    className={styles.input}
+                    onChange={onChange}
+                    name={name}
+                    type={type}
+                    value={value} />
             </div>
         );
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getAllPublicEvents } from '../../rest_api/js/data';
 import EventsList from '../../components/eventsList';
 import Input from '../../components/input';
+import RegularButton from '../../components/button'
 import styles from './index.module.css';
 
 export class SearchPage extends Component {
@@ -52,7 +53,7 @@ export class SearchPage extends Component {
                             onChange={this.onChangeHandler}
                             placeholder="Search"
                         />
-                        <button className={styles.btn}>Search public events</button>
+                        <RegularButton title='Search public events'/>
                     </form>
                     <div className={styles.divSearched}>
                         <h1>Public events</h1>

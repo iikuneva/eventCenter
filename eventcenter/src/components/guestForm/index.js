@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Input from '../../components/input';
-import styles from './index.module.css';
+import RegularButton from '../../components/button'
 
 
 class GuestForm extends Component {
@@ -56,7 +56,7 @@ class GuestForm extends Component {
                         onChange={this.onChangeHandler}
                         placeholder="E-mail"
                     />
-                    <button className={styles.btn}>Add guest</button>
+                     <RegularButton title='Add guest'/>
                 </form>
             </>
         );

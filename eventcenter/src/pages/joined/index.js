@@ -24,8 +24,6 @@ class JoinedPage extends Component {
         let res = await getAllJoinedUsersByEventId(this.props.match.params.eventid);
         let event = await res.json();
         let guests = event.users_id;
-        console.log(event)
-        console.log(guests)
 
         this.setState({
             event,

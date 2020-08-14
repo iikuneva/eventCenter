@@ -11,13 +11,21 @@
     text-align: center;
     
 }
-
-.eventCard>img {
+.imgContainer{
     width: 100%;
-    /* max-height: 70%; */
+    max-height: 50%;
+    overflow: hidden;
+}
+
+.imgContainer > img {
+    width: 100%;
+    /* max-height: 100%; */
     height: auto;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    display: block;
+    object-fit: contain;
+ 
 }
 
 .linkContainer{
@@ -40,10 +48,6 @@
 .link:hover{
     background-color: rgb(120, 194, 173);
 }
-/* 
-.info{
-  padding: 0;  
-} */
 
 
 

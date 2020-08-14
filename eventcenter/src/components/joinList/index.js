@@ -1,13 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-// import styles from './index.module.css';
-
 
 class JoinList extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
-
     render() {
         let guests = this.props.guests || [];
         return (

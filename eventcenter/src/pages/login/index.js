@@ -4,6 +4,7 @@ import Input from '../../components/input';
 import { login } from '../../rest_api/js/data.js';
 import UserContext from '../../Context';
 import styles from './index.module.css';
+import RegularButton from '../../components/button'
 
 
 const LoginPage = () => {
@@ -65,7 +66,7 @@ const LoginPage = () => {
                     onChange={e => setPassword(e.target.value)}
                     placeholder="Password"
                 />
-                <button className={styles.btn}>Login</button>
+                <RegularButton title='Login'/>
             </form>
         </div>
     );

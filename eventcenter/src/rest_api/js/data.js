@@ -1,3 +1,4 @@
+
 function host(endpoint) {
     return `https://api.backendless.com/166AD46B-8A6A-E292-FF8F-0B9077D30700/D7A10867-811F-482F-A58B-E8B9070B9361/${endpoint}`;
 }
@@ -75,6 +76,9 @@ export async function logoutApi() {
 export async function getEventById(id) {
     const response = await fetch(host(endpoints.EVENT + '/' + id + `?relationsDepth=1`));
     const data = await response.json();
+    if(response.status === 404){
+        throw new Error(`Page not found`);
+    }
     return data;
 }
 

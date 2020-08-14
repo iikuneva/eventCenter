@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Input from '../../components/input';
 import { createEvent } from '../../rest_api/js/data.js';
+import RegularButton from '../../components/button'
 import styles from './index.module.css';
 
 
@@ -50,7 +51,6 @@ class CreatePage extends Component {
             max_guests: Number(this.state.max_guests),
             is_public: this.state.is_public,
         };
-        // console.log(event);
 
         try {
             if (event.name.length === 0) {
@@ -120,7 +120,6 @@ class CreatePage extends Component {
                         placeholder='Event name'
                     />
                     <div>
-                        {/* <label> Event Type */}
                         <select className={styles.select} name="category" value={this.state.category} onChange={this.onChangeHandler}>
                             <option value="party">Тype of event</option>
                             <option value="party">Party</option>
@@ -135,7 +134,6 @@ class CreatePage extends Component {
                             <option value="trip">Trip</option>
                             <option value="other">Other</option>
                         </select>
-                        {/* </label> */}
                     </div>
                     <Input
                         name="description"
@@ -172,12 +170,10 @@ class CreatePage extends Component {
                     />
                     <span>Maximum guests</span>
                     <Input
-                        // placeholder="Maximum guests"
                         name="max_guests"
                         value={Number(this.state.max_guests)}
                         type="number"
                         onChange={this.onChangeHandler}
-                        // label="Maximum guests"
                     />
                     <div className={styles.formOptions}>
                         <div>
@@ -186,28 +182,24 @@ class CreatePage extends Component {
                         <div>
                             <span>Public</span>
                             <Input
-                                // label="public"
                                 name="is_public"
                                 type="radio"
                                 value={true}
                                 checked={this.state.is_public === true}
                                 onChange={this.onRadioHandler}
-                                //label="Public - Anyone can see it."
                             />
                             <span>Private</span>
                             <Input
-                                // label="private"
                                 name="is_public"
                                 type="radio"
                                 value={false}
                                 checked={this.state.is_public === false}
                                 onChange={this.onRadioHandler}
-                                //label="Private - Only people who have a link can see it."
                             />
                         </div>
 
                     </div>
-                    <button className={styles.btn}>Create</button>
+                    <RegularButton title="Create" />
                 </form>
             </div>
         );

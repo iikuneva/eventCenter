@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Input from '../../components/input';
 import { getEventById, updateEvent } from '../../rest_api/js/data.js';
+import RegularButton from '../../components/button'
 import styles from './index.module.css';
 
 
@@ -146,7 +147,6 @@ class EditPage extends Component {
                         placeholder='Event name'
                     />
                     <div>
-                        {/* <label> Event Type */}
                         <select className={styles.select} name="category" value={this.state.category} onChange={this.onChangeHandler}>
                             <option value="party">Тype of event</option>
                             <option value="party">Party</option>
@@ -161,7 +161,6 @@ class EditPage extends Component {
                             <option value="trip">Trip</option>
                             <option value="other">Other</option>
                         </select>
-                        {/* </label> */}
                     </div>
                     <Input
                         name="description"
@@ -202,7 +201,6 @@ class EditPage extends Component {
                         value={Number(this.state.max_guests)}
                         type="number"
                         onChange={this.onChangeHandler}
-                        // label="Maximum guests"
                     />
                     <div className={styles.formOptions}>
                         <div>
@@ -216,7 +214,6 @@ class EditPage extends Component {
                                 value={true}
                                 checked={this.state.is_public === true}
                                 onChange={this.onRadioHandler}
-                                // label="Public - Anyone can see it."
                             />
                             <span>Private</span>
                             <Input
@@ -225,11 +222,10 @@ class EditPage extends Component {
                                 value={false}
                                 checked={this.state.is_public === false}
                                 onChange={this.onRadioHandler}
-                                // label="Private - Only people who have a link can see it."
                             />
                         </div>
                     </div>
-                    <button className={styles.btn} >Update event</button>
+                    <RegularButton title="Update event" />
                 </form>
             </div>
         );

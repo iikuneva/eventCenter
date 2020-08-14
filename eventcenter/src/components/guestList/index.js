@@ -22,7 +22,6 @@ class GuestList extends Component {
 
     render() {
         let guests = this.props.guests || [];
-        // console.log(guests)
         return (
             <div className={styles.table}>
                 <table>

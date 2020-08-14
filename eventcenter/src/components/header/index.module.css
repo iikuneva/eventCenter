@@ -1,15 +1,11 @@
 .header{
     background-color:  #272F3B;
-    /* background-color: rgb(120, 194, 173); */
-    /* background-color: rgb(210, 234, 227); */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 2em 0 2em;
     color: white;
     min-height: 65px;
-    /* margin-top: auto; */
-    /* margin-bottom: auto; */
     font-weight: 500;
     font-size: 1.1em;
 }

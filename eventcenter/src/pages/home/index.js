@@ -86,13 +86,10 @@ export class HomePage extends Component {
                                 <Link className={styles.link} to={'/data/event'}>CREATE EVENT</Link>
                             </div>
                         </div>
-                        {/* </div> */}
-                        {/* <hr /> */}
                         <div className={styles.search}>
                             <form onSubmit={this.onSubmitHandler}>
                                 <div>
                                     <Input
-                                        // className={styles.input}
                                         name="searchString"
                                         type="text"
                                         value={this.state.search}

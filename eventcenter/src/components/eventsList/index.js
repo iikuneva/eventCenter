@@ -10,7 +10,6 @@ class EventsList extends Component {
             <div className={styles.cardsList}>
                 {this.props.events.map(e => (
                     <EventCard
-                        // del={() => this.props.deleteEvent(e.id)}
                         key={e.objectId}
                         eventid={e.objectId}
                         name={e.name}

@@ -1,4 +1,5 @@
 .errorMessage{
+    width:25%;
     position: absolute;
     top: 50px;
     right: 0;
@@ -19,20 +20,3 @@
     margin: 0 auto;
 }
 
-.btn{
-    width: 50%;
-    height: 2em;
-    padding: 1em;
-    margin: 1em;
-    font-size: 18px;
-    color: grey;
-    border-radius: 10px;
-    border: none;
-    background-color: rgb(210, 234, 227);
-    cursor: pointer;
-}
-
-.btn:hover{
-    background-color: rgb(120, 194, 173);
-    color:white;
-}

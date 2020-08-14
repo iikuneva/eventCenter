@@ -4,6 +4,7 @@ import { register, login } from '../../rest_api/js/data.js';
 import { withRouter } from 'react-router-dom';
 import UserContext from '../../Context';
 import styles from './index.module.css';
+import RegularButton from '../../components/button'
 
 
 class RegisterPage extends Component {
@@ -127,7 +128,7 @@ render() {
                     onChange={this.onChangeHandler}
                     placeholder="Re-password"
                 />
-                <button className={styles.btn}>Register</button>
+                <RegularButton title='Register'/>
             </form>
         </div>
     );
