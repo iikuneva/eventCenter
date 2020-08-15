@@ -54,3 +54,13 @@ div.formOptions > div > span {
     outline: none;
     border: 1px solid grey;
 }
+
+.textarea{
+    margin: 1em;
+    width: 50%;
+    height: 10em;
+    padding: 1em;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid grey;
+}

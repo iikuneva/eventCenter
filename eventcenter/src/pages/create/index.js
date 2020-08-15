@@ -135,12 +135,21 @@ class CreatePage extends Component {
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    <Input
+                    <div>
+                        <textarea
+                            className={styles.textarea}
+                            name="description"
+                            value={this.state.description}
+                            onChange={this.onChangeHandler}
+                            placeholder="Description"
+                        ></textarea>
+                    </div>
+                    {/* <Input
                         name="description"
                         value={this.state.description}
                         onChange={this.onChangeHandler}
                         placeholder="Description"
-                    />
+                    /> */}
                     <Input
                         name="location_name"
                         value={this.state.location_name}

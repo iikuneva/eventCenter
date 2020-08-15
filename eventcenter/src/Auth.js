@@ -24,8 +24,6 @@ const Auth = (props) => {
         })
       }
     
-      // console.log('user', user);
-
     return (
         <UserContext.Provider value={{
             user,

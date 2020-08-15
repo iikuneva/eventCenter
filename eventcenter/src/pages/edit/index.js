@@ -74,7 +74,7 @@ class EditPage extends Component {
             category: this.state.category,
             date_time: Date.parse(this.state.date_time),
             imageUrl: this.state.imageUrl,
-            max_guests: this.state.max_guests,
+            max_guests: Number(this.state.max_guests),
             is_public: this.state.is_public
         };
 
@@ -162,12 +162,21 @@ class EditPage extends Component {
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    <Input
+                    {/* <Input
                         name="description"
                         value={this.state.description}
                         onChange={this.onChangeHandler}
                         placeholder="Description"
-                    />
+                    /> */}
+                    <div>
+                        <textarea
+                            className={styles.textarea}
+                            name="description"
+                            value={this.state.description}
+                            onChange={this.onChangeHandler}
+                            placeholder="Description"
+                        ></textarea>
+                    </div>
                     <Input
                         name="location_name"
                         value={this.state.location_name}

@@ -367,6 +367,24 @@ export async function guestRejection(guestid) {
     return data;
 }
 
+//guest's answer
+export async function guestAnswer(guestid, answer) {
+
+    const result = await fetch(host(endpoints.GUESTS + `/${guestid}`), {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(
+                { 
+                "is_pending": false,
+                 "is_attending": answer 
+                })
+    });
+    const data = await result.json();
+    return data;
+}
+
 //get guestid
 // export async function getGuestId(eventid, guestid) {
 //     let allGuest = getAllGuestsByEventId(eventid);

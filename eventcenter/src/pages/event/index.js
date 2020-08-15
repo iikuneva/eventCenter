@@ -25,7 +25,8 @@ class EventPage extends Component {
             hideConfirmBtn: false,
             hideRejectBtn: false,
             error: false,
-            notFound: false
+            notFound: false,
+            load: true
         };
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -47,29 +48,25 @@ class EventPage extends Component {
     }
 
     async getData() {
-       
-        try{
-        const event = await getEventById(this.props.match.params.eventid);
+        try {
+            const event = await getEventById(this.props.match.params.eventid);
 
-        if (event.hasOwnProperty('errorData')) {
+            if (event.hasOwnProperty('errorData')) {
                 this.setState({
                     error: { message: event.message }
                 })
                 return;
             }
 
-            // this.setState({
-            //     notFound: true
-            // })
-            // return;
             this.setState({ event });
+            this.setState({ load: false });
         } catch (e) {
             console.error(e);
             this.setState({
                 notFound: e.message
             })
         }
-        
+
     }
 
     atendeeHandler(e) {
@@ -191,10 +188,9 @@ class EventPage extends Component {
                 </div>
             );
         }
-        if(this.state.notFound){
+        if (this.state.notFound) {
             throw new Error('Invalid data')
         }
-        // let main = <p>Loading...</p>
         let main = <div className={styles.linkContainer}><Link className={styles.link} to="/users/login"><strong>Login</strong> to join event!</Link></div>;
 
         const event = this.state.event;
@@ -203,7 +199,6 @@ class EventPage extends Component {
         if (loggedIn) {
             if ((this.context.user.objectId === event.ownerId) && event.is_public) {
                 main = (
-
                     <div className={styles.btnContainer}>
                         <RegularButton
                             title='Joined List'
@@ -244,7 +239,6 @@ class EventPage extends Component {
                     if (!event.users_id.find(u => u.objectId === this.context.user.objectId)) {
                         main = (
                             <div>
-                                {/* <button className={styles.btn} onClick={this.onJoinHandler} disabled={this.state.submittingJoin}>{this.state.titleJoin}</button> */}
                                 <RegularButton
                                     title={this.state.titleJoin}
                                     onClick={this.onJoinHandler}
@@ -287,24 +281,27 @@ class EventPage extends Component {
             }
         }
 
-
         return (
-            <div className={styles.container}>
-                {errors}
-                <div className={styles.eventPage}>
-                    <div className={styles.imgContainerDiv}>
-                        <img alt={event.category} src={event.imageUrl || images[event.category]} />
+            <>
+                {this.state.load ? <p>Loading ...</p>
+                    : <div className={styles.container}>
+                        {errors}
+                        <div className={styles.eventPage}>
+                            <div className={styles.imgContainerDiv}>
+                                <img alt={event.category} src={event.imageUrl || images[event.category]} />
+                            </div>
+                            <h1>{event.name}</h1>
+                            <h3>Location name: {event.location_name}</h3>
+                            <h3>Location address: {event.address}</h3>
+                            <h3>Date/time: {(new Date(event.date_time)).toLocaleString()}</h3>
+                            <p>{event.description}</p>
+                        </div>
+                        <div className={styles.mainContainer}>
+                            {main}
+                        </div>
                     </div>
-                    <h1>{event.name}</h1>
-                    <h3>Location name: {event.location_name}</h3>
-                    <h3>Location address: {event.address}</h3>
-                    <h3>Date/time: {(new Date(event.date_time)).toLocaleString()}</h3>
-                    <p>{event.description}</p>
-                </div>
-                <div className={styles.mainContainer}>
-                    {main}
-                </div>
-            </div>
+                }
+            </>
         );
     }
 }
