@@ -41,7 +41,7 @@
 }
 
 .btnConfirm{
-    width: 15%;
+    width: 35%;
     height: 0.8em;
     padding: 1em;
     margin: 1em;
@@ -60,7 +60,7 @@
 }
 
 .btnReject{
-    width: 15%;
+    width: 35%;
     height: 0.8em;
     padding: 1em;
     margin: 1em;

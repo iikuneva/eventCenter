@@ -46,6 +46,7 @@ class EditPage extends Component {
             max_guests: defaultEvent.max_guests,
             is_public: defaultEvent.is_public
         });
+
     }
 
     locDate(date) {
@@ -162,12 +163,6 @@ class EditPage extends Component {
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    {/* <Input
-                        name="description"
-                        value={this.state.description}
-                        onChange={this.onChangeHandler}
-                        placeholder="Description"
-                    /> */}
                     <div>
                         <textarea
                             className={styles.textarea}

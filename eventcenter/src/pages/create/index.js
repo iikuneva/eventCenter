@@ -144,12 +144,6 @@ class CreatePage extends Component {
                             placeholder="Description"
                         ></textarea>
                     </div>
-                    {/* <Input
-                        name="description"
-                        value={this.state.description}
-                        onChange={this.onChangeHandler}
-                        placeholder="Description"
-                    /> */}
                     <Input
                         name="location_name"
                         value={this.state.location_name}
